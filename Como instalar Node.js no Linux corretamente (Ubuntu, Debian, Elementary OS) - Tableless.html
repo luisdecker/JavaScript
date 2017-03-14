@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<!-- saved from url=(0097)https://tableless.com.br/como-instalar-node-js-no-linux-corretamente-ubuntu-debian-elementary-os/ -->
+<html lang="pt-br" class="post-template-default single single-post postid-56805 single-format-standard"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://securepubads.g.doubleclick.net/gampad/ads?gdfp_req=1&amp;correlator=3793484643617271&amp;output=json_html&amp;callback=googletag.impl.pubads.callbackProxy1&amp;impl=fifs&amp;json_a=1&amp;eid=108809080%2C108809107%2C21060002&amp;sc=1&amp;sfv=1-0-6&amp;iu_parts=7969368%2Cbanner-comunidades%2CRetanguloMedio-MiddleSidebar%2CRetanguloMedio-TopoSidebar&amp;enc_prev_ius=%2F0%2F1%2C%2F0%2F2%2C%2F0%2F3&amp;prev_iu_szs=300x125%2C300x250%7C336x280%7C300x300%7C360x360%2C300x250%7C300x300%7C360x360%7C336x280&amp;cookie_enabled=1&amp;lmt=1489164564&amp;dt=1489164564896&amp;cc=100&amp;frm=20&amp;biw=1905&amp;bih=1072&amp;oid=3&amp;adxs=0%2C0%2C0&amp;adys=0%2C0%2C0&amp;adks=1201956257%2C17540813%2C3796915452&amp;gut=v2&amp;ifi=1&amp;u_tz=-180&amp;u_his=1&amp;u_h=1200&amp;u_w=1920&amp;u_ah=1168&amp;u_aw=1920&amp;u_cd=24&amp;u_nplug=5&amp;u_nmime=7&amp;u_sd=1&amp;flash=24.0.0&amp;url=https%3A%2F%2Ftableless.com.br%2Fcomo-instalar-node-js-no-linux-corretamente-ubuntu-debian-elementary-os%2F&amp;ref=https%3A%2F%2Ftableless.com.br%2Fcode%2Fjavascript%2F&amp;dssz=24&amp;icsg=163900&amp;std=0&amp;vrg=111&amp;vrp=111&amp;ga_vid=1626414713.1489162901&amp;ga_sid=1489164565&amp;ga_hid=1307483064"></script><script async="" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/analytics.js"></script><script id="twitter-wjs" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/widgets.js"></script><script type="text/javascript" id="sendinblue-js" async="" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/automation.js"></script><script type="application/ld+json">
+{"@context":"http:\/\/schema.org\/","@type":"Article","name":"Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS)","headline":"Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS)","url":"https:\/\/tableless.com.br\/como-instalar-node-js-no-linux-corretamente-ubuntu-debian-elementary-os\/","author":{"@type":"Person","name":"Mateus Malaquias","@id":""},"datePublished":"2017-01-09 10:00:38","image":"https:\/\/tableless.com.br\/wp-content\/uploads\/2017\/01\/capa.jpeg","ArticleSection":"C\u00f3digo","Publisher":{"@type":"Organization","name":"Tableless","logo":"http:\/\/tableless.com.br\/wp-content\/themes\/tableless\/images\/logo.png"},"dateModified":"2017-01-09 10:00:38","articleBody":"Recentemente comecei a minha migra\u00e7\u00e3o do JSF para o Angular ent\u00e3o busquei por um bom curso, pela documenta\u00e7\u00e3o do <em>Framework <\/em>e um bom livro t\u00e9cnico.<\/p>\n\nNo caso do curso escolhi inicialmente o do <a href=\"https:\/\/twitter.com\/flaviohalmeida\">Fl\u00e1vio Almeida<\/a> na <a href=\"https:\/\/www.alura.com.br\/curso-online-angular2-parte1\">Alura<\/a> e logo de cara fica claro que n\u00e3o \u00e9 um <em>Framework<\/em> para iniciantes no mundo do JavaScript e nem para iniciantes no mundo da programa\u00e7\u00e3o, o pr\u00f3prio Fl\u00e1vio avisa sobre isso mais de uma vez al\u00e9m de informar sobre a necessidade de dominar o terminal (o terror dos novatos) do seu sistema operacional.\n\nNeste curso o Fl\u00e1vio j\u00e1 come\u00e7a explicando como instalar os requisitos b\u00e1sicos para se come\u00e7ar a estudar sendo basicamente necess\u00e1rio ter instalado o <a href=\"https:\/\/nodejs.org\">Node<\/a>, qualquer editor de texto (utilizo muito o <a href=\"https:\/\/www.sublimetext.com\/\">SublimeText<\/a>, mas pra quem ta come\u00e7ando recomendo usar o <a href=\"https:\/\/code.visualstudio.com\/\">Visual Code<\/a> porque ele nativamente consegue trabalhar muito bem com Angular e Node) e o NPM.\n\nEm distribui\u00e7\u00f5es <em>Debian Based<\/em> \u00e9 muito comum utilizar o comando <strong>apt install -nome do pacote- <\/strong>e com o <a href=\"https:\/\/nodejs.org\">Node<\/a> isso pode lhe trazer problemas, novamente o Fl\u00e1vio avisa sobre o poss\u00edvel problema. Entretanto tenho certeza que os mais novos no linux v\u00e3o preferir utilizar o comando <strong>apt install -nome do pacote-<\/strong> do que fazer a instala\u00e7\u00e3o do pacote bin\u00e1rio e muito provavelmente isso vai quebrar tudo, porque at\u00e9 o momento que estou escrevendo esse texto os reposit\u00f3rios do Debian est\u00e3o desatualizados (o Debian tem o costume de demorar para atualizar seus reposit\u00f3rios).\n\nMinha recomenda\u00e7\u00e3o \u00e9 que voc\u00ea <strong>n\u00e3o instale o Node<\/strong> pelo comando <strong>sudo apt-get install -y nodejs<\/strong> vai acontecer um conflito de nomes entre <em>node <\/em>e <em>nodejs<\/em>, parece besteira que uma simples nomenclatura quebre tudo, mas n\u00e3o \u00e9! O NPM que \u00e9 o gerenciador de depend\u00eancias vai ficar perdido e algumas fun\u00e7\u00f5es n\u00e3o funcionar\u00e3o.\n\n<img src=\"https:\/\/tableless.com.br\/wp-content\/uploads\/2017\/01\/gritos.jpeg\"\/>\n\n<strong>Calma! \u00c9 tentador entrar em desespero, mas segure sua onda\u2026<\/strong>\n\nSe voc\u00ea n\u00e3o deseja compilar o arquivo bin\u00e1rio de instala\u00e7\u00e3o do Node na m\u00e3o grande, a solu\u00e7\u00e3o de instala\u00e7\u00e3o cont\u00ednua simples, instale o NVM primeiro e depois o Node. O legal do NVM \u00e9 que voc\u00ea pode instalar v\u00e1rias vers\u00f5es do Node e ficar alternando entre elas, mas antes de instalar o NVM precisamos de alguns pacotes de depend\u00eancias que j\u00e1 est\u00e3o no reposit\u00f3rio de sua distribui\u00e7\u00e3o Debian Based.\n\n<h4><em>sudo apt-get update sudo apt-get install build-essential libssl-dev<\/em><\/h4>\n\nAgora que voc\u00ea j\u00e1 tem o necess\u00e1rio em seu sistema vamos instalar o NVM:\n\n<h4><em>curl -sL <\/em><a href=\"https:\/\/raw.githubusercontent.com\/creationix\/nvm\/v0.31.0\/install.sh\"><em>https:\/\/raw.githubusercontent.com\/creationix\/nvm\/<\/em><strong><em>v0.31.0<\/em><\/strong><em>\/install.sh<\/em><\/a><em> -o install_nvm.sh<\/em><\/h4>\n\nO n\u00famero da vers\u00e3o que est\u00e1 em negrito pode mudar com o tempo, ent\u00e3o recomendo voc\u00ea acessar a <a href=\"https:\/\/github.com\/creationix\/nvm\">p\u00e1gina do projeto no GitHub<\/a> e procurar pela nova vers\u00e3o.\n\nExecute o scrpit com:\n\n<h4><em>bash install_nvm.sh<\/em><\/h4>\n\nN\u00e3o tenha medo, o que est\u00e1 sendo feito aqui \u00e9 o download de um script e a execu\u00e7\u00e3o do mesmo, tudo vai ser instalado em um diret\u00f3rio oculto na pasta do seu usu\u00e1rio <strong>n\u00e3o \u00e9 necess\u00e1rio utilizar o comando com <\/strong><em>sudo <\/em><strong>nesse caso<\/strong>.\n\nAgora execute:\n\n<h4><em>nvm ls-remote<\/em><\/h4>\n\nEle vai te exibir v\u00e1rias vers\u00f5es do Node e assim sabemos que o NVM est\u00e1 funcionando corretamente. Eu escolhi a vers\u00e3o mais recente do momento a v7.3.0, voc\u00ea pode instal\u00e1-la digitando:\n\n<h4><em>nvm install\u00a07.3.0<\/em><\/h4>\n\nCaso voc\u00ea instale mais de uma vers\u00e3o e no futuro tenha necessidade de alternar entre elas utilize o comando:\n\n<h4><em>nvm use -n\u00famero da\u00a0vers\u00e3o-<\/em><\/h4>\n\nAgora vamos verificar a vers\u00e3o do Node para ter certeza que tudo foi instalado corretamente utilizando o comando:\n\n<h4><em>node -v<\/em><\/h4>\n\nPronto, agora voc\u00ea j\u00e1 pode dar continuidade aos seus estudos de Angular ou Node."}</script>
+  <title>Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless</title>
+  <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="https://tableless.com.br/feed/">
+  <link href="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/css" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/style.css">
+  <link rel="pingback" href="https://tableless.com.br/xmlrpc.php">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  
+<link rel="icon" type="image/png" href="https://tableless.com.br/wp-content/themes/tableless/favicon.png">
+<script async="async" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/gpt.js"></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/7969368/banner-comunidades', [300, 125], 'div-gpt-ad-1473429933704-0').addService(googletag.pubads());
+    googletag.defineSlot('/7969368/RetanguloMedio-MiddleSidebar', [[300, 250], [336, 280], [300, 300], [360, 360]], 'div-gpt-ad-1473429933704-1').addService(googletag.pubads());
+    googletag.defineSlot('/7969368/RetanguloMedio-TopoSidebar', [[300, 250], [300, 300], [360, 360], [336, 280]], 'div-gpt-ad-1481540169507-0').addService(googletag.pubads());
+
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script><script src="https://securepubads.g.doubleclick.net/gpt/pubads_impl_111.js" async=""></script>
+
+<script type="text/javascript">
+window.sendinblue=window.sendinblue||[];window.sendinblue.methods=["identify","init","group","track","page","trackLink"];window.sendinblue.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);window.sendinblue.push(t);return window.sendinblue}};for(var i=0;i<window.sendinblue.methods.length;i++){var key=window.sendinblue.methods[i];window.sendinblue[key]=window.sendinblue.factory(key)}window.sendinblue.load=function(){if(document.getElementById("sendinblue-js"))return;var e=document.createElement("script");e.type="text/javascript";e.id="sendinblue-js";e.async=true;e.src=("https:"===document.location.protocol?"https://":"http://")+"s.sib.im/automation.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)};window.sendinblue.SNIPPET_VERSION="1.0";window.sendinblue.load();window.sendinblue.client_key="swp6ygvsstks39srqk021";window.sendinblue.page();
+</script>
+  
+<!-- This site is optimized with the Yoast SEO plugin v4.2.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="robots" content="noodp">
+<link rel="canonical" href="https://tableless.com.br/como-instalar-node-js-no-linux-corretamente-ubuntu-debian-elementary-os/">
+<link rel="publisher" href="https://plus.google.com/+tableless/posts">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless">
+<meta property="og:description" content="Recentemente comecei a minha migração do JSF para o Angular então busquei por um bom curso, pela documentação do Framework e um bom livro técnico. No caso do curso escolhi inicialmente o do Flávio Almeida na Alura e logo de cara fica claro que não é um Framework para iniciantes no mundo do JavaScript e …">
+<meta property="og:url" content="https://tableless.com.br/como-instalar-node-js-no-linux-corretamente-ubuntu-debian-elementary-os/">
+<meta property="og:site_name" content="Tableless">
+<meta property="article:publisher" content="http://facebook.com/tablelessbr">
+<meta property="article:tag" content="angular2">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="NodeJS">
+<meta property="article:section" content="Código">
+<meta property="article:published_time" content="2017-01-09T10:00:38-03:00">
+<meta property="article:modified_time" content="2017-01-05T19:49:24-03:00">
+<meta property="og:updated_time" content="2017-01-05T19:49:24-03:00">
+<meta property="fb:admins" content="1516635839">
+<meta property="og:image" content="https://tableless.com.br/wp-content/uploads/2017/01/capa.jpeg">
+<meta property="og:image:width" content="750">
+<meta property="og:image:height" content="422">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="Recentemente comecei a minha migração do JSF para o Angular então busquei por um bom curso, pela documentação do Framework e um bom livro técnico. No caso do curso escolhi inicialmente o do Flávio Almeida na Alura e logo de cara fica claro que não é um Framework para iniciantes no mundo do JavaScript e […]">
+<meta name="twitter:title" content="Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless">
+<meta name="twitter:site" content="@tableless">
+<meta name="twitter:image" content="https://tableless.com.br/wp-content/uploads/2017/01/capa.jpeg">
+<meta name="twitter:creator" content="@mmalaquias1">
+<!-- / Yoast SEO plugin. -->
+
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Feed de comentários para Tableless » Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS)" href="https://tableless.com.br/como-instalar-node-js-no-linux-corretamente-ubuntu-debian-elementary-os/feed/">
+<link rel="stylesheet" id="single-css" href="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/single.css" type="text/css" media="all">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://tableless.com.br/xmlrpc.php?rsd">
+<link rel="alternate" type="application/json+oembed" href="https://tableless.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftableless.com.br%2Fcomo-instalar-node-js-no-linux-corretamente-ubuntu-debian-elementary-os%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://tableless.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftableless.com.br%2Fcomo-instalar-node-js-no-linux-corretamente-ubuntu-debian-elementary-os%2F&amp;format=xml">
+<style type="text/css">img#wpstats{display:none}</style><script src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/embed.js" data-timestamp="1489164563902"></script><script src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/count-data.js"></script><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-6/html/container.html"></head>
+<body>
+
+<header class="tb-header">
+  <div class="tb-container">
+    <h1 class="tb-logo"><a href="https://tableless.com.br/" title="Desenvolvimento inteligente com padrões web e design">Tableless</a></h1>
+    <span class="tb-search-btn">Busca</span>
+    <nav class="menu-menu-principal-container"><ul id="menu-menu-principal" class="tb-menu"><li id="menu-item-55845" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-55845"><a href="https://tableless.com.br/como-instalar-node-js-no-linux-corretamente-ubuntu-debian-elementary-os/#">Categorias</a>
+<ul class="sub-menu">
+	<li id="menu-item-55851" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-55851"><a href="https://tableless.com.br/code/code-html/">HTML</a></li>
+	<li id="menu-item-55852" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-55852"><a href="https://tableless.com.br/code/javascript/">JavaScript</a></li>
+	<li id="menu-item-55850" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-55850"><a href="https://tableless.com.br/code/css/">CSS</a></li>
+	<li id="menu-item-55860" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-55860"><a href="https://tableless.com.br/semantica/">Semântica</a></li>
+	<li id="menu-item-55847" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-55847"><a href="https://tableless.com.br/artigos/">Artigos</a></li>
+	<li id="menu-item-55848" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-55848"><a href="https://tableless.com.br/browsers/">Browsers</a></li>
+	<li id="menu-item-55849" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-55849"><a href="https://tableless.com.br/code/backend/">Back-end</a></li>
+	<li id="menu-item-55846" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-55846"><a href="https://tableless.com.br/agile-e-gestao/">Agile e Gestão</a></li>
+	<li id="menu-item-55853" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-55853"><a href="https://tableless.com.br/code/napratica/">Técnicas e Práticas</a></li>
+	<li id="menu-item-55854" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-55854"><a href="https://tableless.com.br/cat-design/">Design</a></li>
+	<li id="menu-item-55855" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-55855"><a href="https://tableless.com.br/digest/freebies/">Freebies</a></li>
+	<li id="menu-item-55856" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-55856"><a href="https://tableless.com.br/editores-2/">Editores</a></li>
+	<li id="menu-item-55857" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-55857"><a href="https://tableless.com.br/mercado-comportamento/">Mercado e Comportamento</a></li>
+	<li id="menu-item-55858" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-55858"><a href="https://tableless.com.br/internet-movel/">Mobile</a></li>
+	<li id="menu-item-55859" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-55859"><a href="https://tableless.com.br/noticias/">Notícias</a></li>
+	<li id="menu-item-55861" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-55861"><a href="https://tableless.com.br/tooling/git/">Git</a></li>
+	<li id="menu-item-55862" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-55862"><a href="https://tableless.com.br/videos-tutoriais/">Vídeos Tutoriais</a></li>
+	<li id="menu-item-55863" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-55863"><a href="https://tableless.com.br/cms-2/wordpress/">WordPress</a></li>
+</ul>
+</li>
+<li id="menu-item-51693" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-51693"><a href="http://forum.tableless.com.br/">Fórum</a></li>
+<li id="menu-item-53997" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-53997"><a href="http://tableless.github.io/iniciantes/">Para Iniciantes</a></li>
+<li id="menu-item-53698" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-53698"><a href="http://tableless.com.br/servicos/">Fazemos o seu código front-end</a></li>
+<li id="menu-item-7641" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7641"><a href="https://tableless.com.br/contato/">Contato</a></li>
+</ul></nav>
+    <a href="https://tableless.com.br/como-instalar-node-js-no-linux-corretamente-ubuntu-debian-elementary-os/#" class="tb-sandwich" aria-label="Clique para abrir o menu" icon-menu="☰">Menu</a>
+  </div>
+</header>
+
+
+<div class="tb-search-box">
+  <div class="tb-container">
+    <span class="tb-close-search"></span>
+    <form role="search" method="get" id="searchform" class="searchform" action="https://tableless.com.br/">
+      <label class="screen-reader-text" for="s">Pesquisar por:</label>
+      <input type="text" value="" name="s" id="s" placeholder="Buscar">
+      <input type="submit" id="searchsubmit" value="Buscar">
+    </form>
+
+  </div>
+</div>
+
+<div class="tb-post-page">
+
+      <figure class="tb-featured-image"><img width="750" height="422" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/capa.jpeg" class="attachment-medium size-medium wp-post-image" alt=""></figure>
+  
+  <div class="tb-post-content">
+
+    <section class="tb-post-area">
+
+      <article class="tb-post-text">
+        
+<header>
+        
+          <h1>
+            Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS)          </h1>
+
+          <a href="https://tableless.com.br/como-instalar-node-js-no-linux-corretamente-ubuntu-debian-elementary-os/#disqus_thread" class="tb-comment-count">7 comentários</a>
+          <span class="tb-author-info">
+            <img alt="" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/f70a443107c6f2a232cf9ba17ac4d054" srcset="https://secure.gravatar.com/avatar/f70a443107c6f2a232cf9ba17ac4d054?s=200&amp;d=retro&amp;r=g 2x" class="avatar avatar-100 photo" height="100" width="100">            por <a href="https://tableless.com.br/author/mateus-malaquias1/" title="Posts de Mateus Malaquias" rel="author">Mateus Malaquias</a>          </span>
+        </header>
+  <p>Recentemente comecei a minha migração do JSF para o Angular então busquei por um bom curso, pela documentação do <em>Framework </em>e um bom livro técnico.</p>
+<p>No caso do curso escolhi inicialmente o do <a href="https://twitter.com/flaviohalmeida">Flávio Almeida</a> na <a href="https://www.alura.com.br/curso-online-angular2-parte1">Alura</a> e logo de cara fica claro que não é um <em>Framework</em> para iniciantes no mundo do JavaScript e nem para iniciantes no mundo da programação, o próprio Flávio avisa sobre isso mais de uma vez além de informar sobre a necessidade de dominar o terminal (o terror dos novatos) do seu sistema operacional.</p>
+<p>Neste curso o Flávio já começa explicando como instalar os requisitos básicos para se começar a estudar sendo basicamente necessário ter instalado o <a href="https://nodejs.org/">Node</a>, qualquer editor de texto (utilizo muito o <a href="https://www.sublimetext.com/">SublimeText</a>, mas pra quem ta começando recomendo usar o <a href="https://code.visualstudio.com/">Visual Code</a> porque ele nativamente consegue trabalhar muito bem com Angular e Node) e o NPM.</p>
+<p>Em distribuições <em>Debian Based</em> é muito comum utilizar o comando <strong>apt install -nome do pacote- </strong>e com o <a href="https://nodejs.org/">Node</a> isso pode lhe trazer problemas, novamente o Flávio avisa sobre o possível problema. Entretanto tenho certeza que os mais novos no linux vão preferir utilizar o comando <strong>apt install -nome do pacote-</strong> do que fazer a instalação do pacote binário e muito provavelmente isso vai quebrar tudo, porque até o momento que estou escrevendo esse texto os repositórios do Debian estão desatualizados (o Debian tem o costume de demorar para atualizar seus repositórios).</p>
+<p>Minha recomendação é que você <strong>não instale o Node</strong> pelo comando <strong>sudo apt-get install -y nodejs</strong> vai acontecer um conflito de nomes entre <em>node </em>e <em>nodejs</em>, parece besteira que uma simples nomenclatura quebre tudo, mas não é! O NPM que é o gerenciador de dependências vai ficar perdido e algumas funções não funcionarão.</p>
+<p><img src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/gritos.jpeg"></p>
+<p><strong>Calma! É tentador entrar em desespero, mas segure sua onda…</strong></p>
+<p>Se você não deseja compilar o arquivo binário de instalação do Node na mão grande, a solução de instalação contínua simples, instale o NVM primeiro e depois o Node. O legal do NVM é que você pode instalar várias versões do Node e ficar alternando entre elas, mas antes de instalar o NVM precisamos de alguns pacotes de dependências que já estão no repositório de sua distribuição Debian Based.</p>
+<h4><em>sudo apt-get update sudo apt-get install build-essential libssl-dev</em></h4>
+<p>Agora que você já tem o necessário em seu sistema vamos instalar o NVM:</p>
+<h4><em>curl -sL </em><a href="https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh"><em>https://raw.githubusercontent.com/creationix/nvm/</em><strong><em>v0.31.0</em></strong><em>/install.sh</em></a><em> -o install_nvm.sh</em></h4>
+<p>O número da versão que está em negrito pode mudar com o tempo, então recomendo você acessar a <a href="https://github.com/creationix/nvm">página do projeto no GitHub</a> e procurar pela nova versão.</p>
+<p>Execute o scrpit com:</p>
+<h4><em>bash install_nvm.sh</em></h4>
+<p>Não tenha medo, o que está sendo feito aqui é o download de um script e a execução do mesmo, tudo vai ser instalado em um diretório oculto na pasta do seu usuário <strong>não é necessário utilizar o comando com </strong><em>sudo </em><strong>nesse caso</strong>.</p>
+<p>Agora execute:</p>
+<h4><em>nvm ls-remote</em></h4>
+<p>Ele vai te exibir várias versões do Node e assim sabemos que o NVM está funcionando corretamente. Eu escolhi a versão mais recente do momento a v7.3.0, você pode instalá-la digitando:</p>
+<h4><em>nvm install&nbsp;7.3.0</em></h4>
+<p>Caso você instale mais de uma versão e no futuro tenha necessidade de alternar entre elas utilize o comando:</p>
+<h4><em>nvm use -número da&nbsp;versão-</em></h4>
+<p>Agora vamos verificar a versão do Node para ter certeza que tudo foi instalado corretamente utilizando o comando:</p>
+<h4><em>node -v</em></h4>
+<p>Pronto, agora você já pode dar continuidade aos seus estudos de Angular ou Node.</p>
+
+        <footer>
+            <span class="tb-post-time">Publicado no dia <time datetime="2017-01-09 10:00"> 9 de janeiro de 2017</time></span>
+        </footer>
+
+      </article>
+
+
+      <div class="tb-social-links">
+        <ul>
+          <li> <a href="https://twitter.com/share" class="tb-social-twitter" data-via="tableless" data-related="tableless" data-hashtags="soudev">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></li>
+          <li><a class="tb-social-facebook" href="http://www.facebook.com/sharer/sharer.php?u=https://tableless.com.br/como-instalar-node-js-no-linux-corretamente-ubuntu-debian-elementary-os/" rel="nofollow" onclick="window.open(this.href, &#39;tb-face-popup&#39;, &#39;menubar=no,toolbar=no,resizable=yes,scrollbars=yes,left=980,top=370,width=400,height=200&#39;); return false;">Facebook</a></li>
+          <li><a href="https://plus.google.com/+tableless" class="tb-social-google">Google+</a></li>
+        </ul>
+      </div>
+
+      <div class="tb-post-author">
+        <div class="tb-post-author-media">
+            <img alt="" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/f70a443107c6f2a232cf9ba17ac4d054(1)" srcset="https://secure.gravatar.com/avatar/f70a443107c6f2a232cf9ba17ac4d054?s=240&amp;d=retro&amp;r=g 2x" class="avatar avatar-120 photo" height="120" width="120">              <div class="tb-post-author-social">
+
+              </div>
+        </div>
+        <div class="tb-post-author-details">
+          <h3>Mateus Malaquias</h3>
+          <p>FullStack Dev (#Angular, #Java#MicroProfile), @javabahia JUG Leader, membro do @soujava e @jcp_org, Front-end entusiasta.</p>
+          <p><a href="https://tableless.com.br/?author=722">Veja mais artigos deste autor</a></p>
+        </div>
+            </div>
+
+      <section class="tb-related-posts">
+        <h2 class="tb-title-section">Leia também</h2>
+        <p class="tb-lead-paragraph">Aproveite para ler estes posts também:</p>
+
+        <div class="tb-related-group">
+        
+                <a href="https://tableless.com.br/crie-sites-em-questao-de-minutos-com-o-pingendo/" class="tb-box">
+              <figure><img width="400" height="267" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/pingendo-editor-bootstrap.jpg" class="attachment-thumb size-thumb wp-post-image" alt=""></figure>
+            <time class="tb-post-time" datetime="2017-03-06 7:15"> 6 mar 2017</time>
+      <h2>Crie sites em questão de minutos com o Pingendo</h2>
+    </a>
+
+          
+                <a href="https://tableless.com.br/teste-de-carga-em-apis-utilizando-artillery/" class="tb-box">
+              <figure><img width="400" height="187" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/1-IhnFGV_MuELTbGqf8caPvg-1.png" class="attachment-thumb size-thumb wp-post-image" alt=""></figure>
+            <time class="tb-post-time" datetime="2017-03-06 7:11"> 6 mar 2017</time>
+      <h2>Teste de carga em APIs utilizando Artillery</h2>
+    </a>
+
+          
+                <a href="https://tableless.com.br/ux-como-aumentar-tolerancia-do-usuario-para-atrasos/" class="tb-box">
+              <figure><img width="400" height="114" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/Mask-1.png" class="attachment-thumb size-thumb wp-post-image" alt=""></figure>
+            <time class="tb-post-time" datetime="2017-03-01 9:46"> 1 mar 2017</time>
+      <h2>UX: Como aumentar a tolerância do usuário para atrasos</h2>
+    </a>
+
+                  </div>
+      </section>
+
+<div class="tb-comments">
+  <div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/saved_resource.html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 1396px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://tableless.com.br/como-instalar-node-js-no-linux-corretamente-ubuntu-debian-elementary-os/';
+      this.page.identifier = '56805'; 
+    };
+    
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//tableless.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+</div>
+    </section>
+
+    <aside class="tb-sidebar">
+  <!-- /7969368/RetanguloMedio-TopoSidebar -->
+  <div class="tb-banner-top">
+    <div id="div-gpt-ad-1461064765000-4">
+      <script type="text/javascript">
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1461064765000-4'); });
+      </script>
+    </div>
+  </div>
+  <div class="tb-sidebar-inner">
+    <div id="text-48" class="tb-widget widget_text">			<div class="textwidget"><!-- /7969368/RetanguloMedio-MiddleSidebar -->
+<div id="div-gpt-ad-1473429933704-1">
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473429933704-1'); });
+</script>
+<div id="google_ads_iframe_/7969368/RetanguloMedio-MiddleSidebar_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/7969368/RetanguloMedio-MiddleSidebar_0" title="3rd party ad content" name="google_ads_iframe_/7969368/RetanguloMedio-MiddleSidebar_0" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom;" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/saved_resource(1).html"></iframe></div></div></div>
+		</div>		<div id="recent-posts-5" class="tb-widget widget_recent_entries">		<h3 class="tb-widget-title">Posts recentes</h3>		<ul>
+					<li>
+				<a href="https://tableless.com.br/crie-sites-em-questao-de-minutos-com-o-pingendo/">Crie sites em questão de minutos com o Pingendo</a>
+						</li>
+					<li>
+				<a href="https://tableless.com.br/teste-de-carga-em-apis-utilizando-artillery/">Teste de carga em APIs utilizando Artillery</a>
+						</li>
+					<li>
+				<a href="https://tableless.com.br/ux-como-aumentar-tolerancia-do-usuario-para-atrasos/">UX: Como aumentar a tolerância do usuário para atrasos</a>
+						</li>
+					<li>
+				<a href="https://tableless.com.br/como-criar-aplicacoes-em-tempo-real-usando-node-js-e-rethinkdb/">Como criar aplicações em tempo real usando Node.js e RethinkDB</a>
+						</li>
+					<li>
+				<a href="https://tableless.com.br/conselhos-de-um-simples-programador/">Conselhos de um simples programador</a>
+						</li>
+				</ul>
+		</div>		<div id="text-23" class="tb-widget widget_text"><h3 class="tb-widget-title">Newsletter</h3>			<div class="textwidget"><iframe width="200" height="159" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/1.html" frameborder="0" scrolling="auto" allowfullscreen="" style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;"></iframe></div>
+		</div><div id="text-47" class="tb-widget widget_text">			<div class="textwidget"><!-- /7969368/RetanguloMedio-TopoSidebar -->
+<div id="div-gpt-ad-1481540169507-0">
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1481540169507-0'); });
+</script>
+<div id="google_ads_iframe_/7969368/RetanguloMedio-TopoSidebar_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/7969368/RetanguloMedio-TopoSidebar_0" title="3rd party ad content" name="google_ads_iframe_/7969368/RetanguloMedio-TopoSidebar_0" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom;" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/saved_resource(2).html"></iframe></div></div>
+</div>
+		</div><div id="top-posts-2" class="tb-widget widget_top-posts"><h3 class="tb-widget-title">Mais vistos</h3><ul>				<li>
+										<a href="https://tableless.com.br/criando-uma-aplicacao-movel-com-ionic-2-e-angular-2-em-dez-passos/" class="bump-view" data-bump-view="tp">
+						Criando uma aplicação móvel com Ionic 2 e Angular 2 em dez passos					</a>
+									</li>
+							<li>
+										<a href="https://tableless.com.br/centralizando-um-objeto-na-horizontal-e-vertical-com-css/" class="bump-view" data-bump-view="tp">
+						Centralizando um objeto na Horizontal e Vertical com CSS					</a>
+									</li>
+							<li>
+										<a href="https://tableless.com.br/criando-um-menu-horizontal-com-css/" class="bump-view" data-bump-view="tp">
+						Criando um Menu Horizontal com CSS					</a>
+									</li>
+							<li>
+										<a href="https://tableless.com.br/crie-sites-em-questao-de-minutos-com-o-pingendo/" class="bump-view" data-bump-view="tp">
+						Crie sites em questão de minutos com o Pingendo					</a>
+									</li>
+							<li>
+										<a href="https://tableless.com.br/tudo-que-voce-queria-saber-sobre-git-e-github-mas-tinha-vergonha-de-perguntar/" class="bump-view" data-bump-view="tp">
+						Tudo que você queria saber sobre Git e GitHub, mas tinha vergonha de perguntar					</a>
+									</li>
+			</ul></div><div id="nav_menu-4" class="tb-widget widget_nav_menu"><h3 class="tb-widget-title">Siga-nos</h3><div class="menu-social-container"><ul id="menu-social" class="menu"><li id="menu-item-4091" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4091"><a title="Siga-nos os bons" href="http://twitter.com/tableless">Twitter</a></li>
+<li id="menu-item-55844" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-55844"><a href="http://medium.com/tableless/">Medium</a></li>
+<li id="menu-item-4092" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4092"><a title="Nossa página no Facebook" href="http://www.facebook.com/tablelessbr">Facebook</a></li>
+<li id="menu-item-4093" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4093"><a title="Nossas novidades direto no Feed RSS" href="http://tableless.com.br/feed">FEED Rss</a></li>
+<li id="menu-item-7790" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7790"><a href="https://plus.google.com/u/1/+tableless?rel=publisher">Google+</a></li>
+</ul></div></div><div id="nav_menu-3" class="tb-widget widget_nav_menu"><h3 class="tb-widget-title">Nós fazemos</h3><div class="menu-nos-fazemos-container"><ul id="menu-nos-fazemos" class="menu"><li id="menu-item-3657" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3657"><a title="Desenvolvimento de código front-end semântico e compatível" href="http://tableless.com.br/servicos/front-end.php?utm_source=sidebar&amp;utm_medium=menuServicos&amp;utm_campaign=tablelessNosFazemosFRONT">Produzimos seu código front-end</a></li>
+<li id="menu-item-4532" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4532"><a href="https://www.eventials.com/pt-br/tableless/">Micro Workshops Online</a></li>
+</ul></div></div><div id="text-49" class="tb-widget widget_text">			<div class="textwidget"><!-- /7969368/banner-comunidades -->
+<div id="div-gpt-ad-1473429933704-0" style="height:125px; width:300px;">
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473429933704-0'); });
+</script>
+<div id="google_ads_iframe_/7969368/banner-comunidades_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/7969368/banner-comunidades_0" title="3rd party ad content" name="google_ads_iframe_/7969368/banner-comunidades_0" width="300" height="125" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom;" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/saved_resource(3).html"></iframe></div></div></div>
+		</div>        <!-- Just do Something! -->
+      </div>
+</aside>
+
+  </div>
+
+
+</div>
+
+<footer class="tb-footer">
+  <div class="tb-container">
+
+  <div class="tb-footer-post">
+    <h5>Leia também:</h5>
+            <a href="https://tableless.com.br/java-origem/">
+          <p class="tb-lead-text">Entendendo um pouco sobre a história do Java.</p>
+        </a>
+    </div>
+
+    <nav>
+      <h6>Sobre</h6>
+      <ul>
+        <li><a href="http://tableless.com.br/contato">Contato</a></li>
+        <li><a href="http://tableless.com.br/anuncie">Anuncie no site</a></li>
+        <li><a href="http://tableless.com.br/seja-um-autor">Seja um Autor</a></li>
+        <li><a href="http://tableless.com.br/sobre">Sobre</a></li>
+      </ul>
+    </nav>
+    <nav>
+      <h6>Interaja</h6>
+      <ul>
+        <li><a href="http://forum.tableless.com.br/">Fórum</a></li>
+        <li><a href="http://tableless.com.br/feed">Feed</a></li>
+        <li><a href="http://twitter.com/tableless">Twitter</a></li>
+        <li><a href="http://facebook.com/tablelessbr">Facebook</a></li>
+      </ul>
+    </nav>
+    <nav>
+      <h6>Comunidade</h6>
+      <ul>
+        <li><a href="http://femug.github.io/femug/">Femug</a></li>
+        <li><a href="http://www.meetup.com/pt-BR/CSS-SP/">MeetupCSS SP</a></li>
+        <li><a href="http://zofe.com.br/">Zofe</a></li>
+        <li><a href="https://braziljs.org/">BrazilJS</a></li>
+        <li><a href="http://www.meetup.com/pt-BR/FrontUX/">FrontUX</a></li>
+      </ul>
+    </nav>
+    <p class="tb-done-community">Escrito pela e para a comunidade web brasileira. <a href="https://tableless.com.br/seja-um-autor?utm_source=footer&amp;utm_medium=link&amp;utm_campaign=linkAjudeFooter">Ajude</a>. <span class="tb-love">♥</span></p>
+  </div>
+</footer>
+
+<script src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+<script id="dsq-count-scr" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/count.js" async="async"></script>
+
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-335027-1', 'tableless.com.br');
+    ga('send', 'pageview');
+  </script>
+
+<script type="text/javascript">
+  $(function(){
+    $( ".contact-form" ).on('submit', function( event ) {
+      if ( $( ".robotDefend" ).val() === "4" ) {
+        return;
+      } else {
+        event.preventDefault();
+      }
+    });
+
+  })
+</script>
+
+
+
+<script type="text/javascript" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/prettify.js"></script>
+<script type="text/javascript" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/scripts.min.js"></script>
+<script type="text/javascript" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/e-201710.js" async="" defer=""></script>
+<script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:4.6',blog:'22395503',post:'56805',tz:'-3',srv:'tableless.com.br'} ]);
+	_stq.push([ 'clickTrackerInit', '22395503', '56805' ]);
+</script>
+
+
+
+
+<iframe style="display: none;" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/saved_resource(4).html"></iframe><iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;" title="Twitter analytics iframe" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/saved_resource(5).html"></iframe><iframe style="display:none" width="0px" height="0px" src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/cookie.html"></iframe><img src="./Como instalar Node.js no Linux corretamente (Ubuntu, Debian, Elementary OS) - Tableless_files/g.gif" alt=":)" width="6" height="5" id="wpstats"></body></html>

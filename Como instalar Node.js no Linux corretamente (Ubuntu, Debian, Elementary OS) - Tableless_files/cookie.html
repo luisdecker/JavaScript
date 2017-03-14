@@ -1,0 +1,372 @@
+
+<!-- saved from url=(0145)https://s.sib.im/cookie.html?session_id=70a1b147-50aa-4bed-bab3-9cd4f308d391.1489162907300&key=swp6ygvsstks39srqk021&email_id=&isNewSession=false -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <script type="text/javascript">
+
+if (typeof JSON !== 'object') {
+    JSON = {};
+}
+
+(function () {
+    'use strict';
+
+    function f(n) {
+        // Format integers to have at least two digits.
+        return n < 10 ? '0' + n : n;
+    }
+
+    if (typeof Date.prototype.toJSON !== 'function') {
+
+        Date.prototype.toJSON = function () {
+
+            return isFinite(this.valueOf())
+                ? this.getUTCFullYear()     + '-' +
+                    f(this.getUTCMonth() + 1) + '-' +
+                    f(this.getUTCDate())      + 'T' +
+                    f(this.getUTCHours())     + ':' +
+                    f(this.getUTCMinutes())   + ':' +
+                    f(this.getUTCSeconds())   + 'Z'
+                : null;
+        };
+
+        String.prototype.toJSON      =
+            Number.prototype.toJSON  =
+            Boolean.prototype.toJSON = function () {
+                return this.valueOf();
+            };
+    }
+
+    var cx,
+        escapable,
+        gap,
+        indent,
+        meta,
+        rep;
+
+
+    function quote(string) {
+
+        escapable.lastIndex = 0;
+        return escapable.test(string) ? '"' + string.replace(escapable, function (a) {
+            var c = meta[a];
+            return typeof c === 'string'
+                ? c
+                : '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+        }) + '"' : '"' + string + '"';
+    }
+
+
+    function str(key, holder) {
+
+
+        var i,          // The loop counter.
+            k,          // The member key.
+            v,          // The member value.
+            length,
+            mind = gap,
+            partial,
+            value = holder[key];
+
+
+        if (value && typeof value === 'object' &&
+                typeof value.toJSON === 'function') {
+            value = value.toJSON(key);
+        }
+
+
+        if (typeof rep === 'function') {
+            value = rep.call(holder, key, value);
+        }
+
+
+        switch (typeof value) {
+        case 'string':
+            return quote(value);
+
+        case 'number':
+
+
+            return isFinite(value) ? String(value) : 'null';
+
+        case 'boolean':
+        case 'null':
+
+
+            return String(value);
+
+
+        case 'object':
+
+
+            if (!value) {
+                return 'null';
+            }
+
+
+            gap += indent;
+            partial = [];
+
+
+            if (Object.prototype.toString.apply(value) === '[object Array]') {
+
+
+                length = value.length;
+                for (i = 0; i < length; i += 1) {
+                    partial[i] = str(i, value) || 'null';
+                }
+
+
+                v = partial.length === 0
+                    ? '[]'
+                    : gap
+                    ? '[\n' + gap + partial.join(',\n' + gap) + '\n' + mind + ']'
+                    : '[' + partial.join(',') + ']';
+                gap = mind;
+                return v;
+            }
+
+
+            if (rep && typeof rep === 'object') {
+                length = rep.length;
+                for (i = 0; i < length; i += 1) {
+                    if (typeof rep[i] === 'string') {
+                        k = rep[i];
+                        v = str(k, value);
+                        if (v) {
+                            partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                        }
+                    }
+                }
+            } else {
+
+
+                for (k in value) {
+                    if (Object.prototype.hasOwnProperty.call(value, k)) {
+                        v = str(k, value);
+                        if (v) {
+                            partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                        }
+                    }
+                }
+            }
+
+
+            v = partial.length === 0
+                ? '{}'
+                : gap
+                ? '{\n' + gap + partial.join(',\n' + gap) + '\n' + mind + '}'
+                : '{' + partial.join(',') + '}';
+            gap = mind;
+            return v;
+        }
+    }
+
+
+    if (typeof JSON.stringify !== 'function') {
+        escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+        meta = {    // table of character substitutions
+            '\b': '\\b',
+            '\t': '\\t',
+            '\n': '\\n',
+            '\f': '\\f',
+            '\r': '\\r',
+            '"' : '\\"',
+            '\\': '\\\\'
+        };
+        JSON.stringify = function (value, replacer, space) {
+
+            var i;
+            gap = '';
+            indent = '';
+
+            if (typeof space === 'number') {
+                for (i = 0; i < space; i += 1) {
+                    indent += ' ';
+                }
+            } else if (typeof space === 'string') {
+                indent = space;
+            }
+
+            rep = replacer;
+            if (replacer && typeof replacer !== 'function' &&
+                    (typeof replacer !== 'object' ||
+                    typeof replacer.length !== 'number')) {
+                throw new Error('JSON.stringify');
+            }
+
+            return str('', {'': value});
+        };
+    }
+
+
+    if (typeof JSON.parse !== 'function') {
+        cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+        JSON.parse = function (text, reviver) {
+
+            var j;
+
+            function walk(holder, key) {
+
+                var k, v, value = holder[key];
+                if (value && typeof value === 'object') {
+                    for (k in value) {
+                        if (Object.prototype.hasOwnProperty.call(value, k)) {
+                            v = walk(value, k);
+                            if (v !== undefined) {
+                                value[k] = v;
+                            } else {
+                                delete value[k];
+                            }
+                        }
+                    }
+                }
+                return reviver.call(holder, key, value);
+            }
+
+
+            text = String(text);
+            cx.lastIndex = 0;
+            if (cx.test(text)) {
+                text = text.replace(cx, function (a) {
+                    return '\\u' +
+                        ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+                });
+            }
+
+            if (/^[\],:{}\s]*$/
+                    .test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@')
+                        .replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']')
+                        .replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+
+
+                j = eval('(' + text + ')');
+
+
+                return typeof reviver === 'function'
+                    ? walk({'': j}, '')
+                    : j;
+            }
+
+            throw new SyntaxError('JSON.parse');
+        };
+    }
+}());  
+  </script>
+  
+<script type="text/javascript">
+        var client_cookie = '';
+        function getQueryVariable(variable) {
+          var query = window.location.search.substring(1);
+          var vars = query.split("&");
+          for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            //alert(pair[0]+"---"+pair[1]);
+            if (pair[0] == variable) {
+              return pair[1];
+            }
+          } 
+          return '';
+        }
+        getCookie = function(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1);
+                if (c.indexOf(name) != -1 && c.substring(0, name.length) == name)
+                    return c.substring(name.length,c.length);
+            }
+            return "";
+        } 
+        function parseJSON (jsonString){
+            try {
+                var o = JSON.parse(jsonString);
+
+                // Handle non-exception-throwing cases:
+                // Neither JSON.parse(false) or JSON.parse(1234) throw errors, hence the type-checking,
+                // but... JSON.parse(null) returns 'null', and typeof null === "object", 
+                // so we must check for that, too.
+                if (o && typeof o === "object" && o !== null) {
+                    return o;
+                }
+            }
+            catch (e) { }
+
+            return false;
+        };
+        
+        //var request_url = 'http://192.168.1.23:1337/user/new';
+        var request_url = 'https://in-automate.sendinblue.com/cookie';
+        
+        var client_key = getQueryVariable('key');
+        var session_id = getQueryVariable('session_id');    
+        var email_id = getQueryVariable('email_id');
+        var server_id = getQueryVariable('s_id'); 
+        var isNewSession = getQueryVariable('isNewSession'); 
+        
+        var cookie_array = [];
+        var timestamp = new Date().getTime();
+                
+
+
+    //fetch current cookie
+    var curr_client_cookie = getCookie("client"); 
+    //fetch bridge cookie  
+    var bridge = getCookie("bridge"); 
+
+    var current_date = new Date();
+    current_date.setFullYear( current_date.getFullYear() + 5);
+    var expires = "expires="+current_date.toGMTString();//Thu, 18 Dec 2014 12:00:00 GMT
+
+    //if exists check 
+    if (curr_client_cookie != '') {
+        //old format
+        if (!parseJSON(curr_client_cookie)) {
+            //convert it into new format
+            //split by &
+            //for each item split by =
+            var t = curr_client_cookie.split('&');
+            var c_t = t[0];
+            var t_t = (t[1].split('='))[1];
+            var s_t = 0;
+            
+            var e = {};
+            e.sid = s_t;
+            e.key = c_t;
+            e.trans = t_t;          
+            e.ts = timestamp;
+            cookie_array.push(e);           
+        } else {
+            cookie_array = parseJSON(curr_client_cookie);
+        }
+        
+        var cookie_array_serialize = JSON.stringify(cookie_array);
+        
+        document.cookie = "client=" + cookie_array_serialize + "; " + expires+"; domain=s.sib.im; path=/";
+    }
+        
+
+
+    client_cookie =  getCookie("client");               
+
+    var d = {};
+    d.key = client_key;
+    d.ccookie = client_cookie;
+    d.session_id = session_id;
+                    
+                
+    if (client_cookie != '' && email_id == '') {  
+        if(isNewSession == "true" || bridge == "false"){  
+            var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+            xmlhttp.open("POST", request_url);
+            xmlhttp.setRequestHeader("Content-Type", "application/json");
+            xmlhttp.send(JSON.stringify(d));
+            document.cookie="bridge=true; "+expires+"; domain=s.sib.im; path=/"
+        }
+    }
+</script>
+</head>
+<body>
+
+
+</body></html>
