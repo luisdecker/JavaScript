@@ -67,4 +67,8 @@ server.listen(3000,function () {
     console.log("Servidor iniciado!");
 });
 
+var chatServer = require('./lib/chat_server');
+chatServer.listen(server);
+
+
 
