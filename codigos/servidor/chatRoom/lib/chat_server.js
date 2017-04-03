@@ -17,6 +17,7 @@ function listen(server){
     io.sockets.on('connection',socketOnConnection);
 
 }
+exports.listen = listen;
 function socketOnConnection(socket) {
     //Dá um nome de guest para o usuário ao conectar
     guestNumber = assignGuestName(socket,guestNumber,nicknames,namesUsed);
@@ -32,7 +33,7 @@ function socketOnConnection(socket) {
 
 }
 function socketOnRooms() {
-    socket.emit('rooms',io.sockets.manager.rooms);
+    socket.emit('rooms',io.of('/').adapter.rooms);
 }
 
 //Funcoes Auxiliares
@@ -65,7 +66,7 @@ function joinRoom(socket,room) {
         text: nicknames[socket.id] + " entrou na sala " + room
     });
     //Verifica quais usuarios estão na sala
-    var usersInRoom = io.sockets.clients(room);
+    var usersInRoom = io.of('/').in(room).clients;
     //Se tiver alguem na sala, mostrar para quem entrou
     if(usersInRoom.length >1){
         var msgUsersInRoom = "Pessoas atualmente na sala "+ room +"; ";
@@ -103,7 +104,7 @@ function handleChangeNameAttempts(socket, nicknames,namesUsed) {
 
                 });
                 //Mensagem de troca de nome
-                socket.broadcast.to(currentRoom[socket.id]).emit('message',{text:nomeAntigo + " agora se chama " + nome});
+                socket.broadcast.to(currentRoom[socket.id]).emit('message',{text:nomeAntigo + " agora se chama " + name});
 
             }else{//Caso o nome já esteja sendo usado
                 socket.emit('nameResult',{
