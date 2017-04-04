@@ -13,6 +13,8 @@ Chat.prototype.enviarMensagem = function(sala,mensagem){
         text:mensagem,
         room:sala
     };
+    console.log('enviarMensagem\n>', mesg);
+    //Console.log("enviarMensagem:", mesg);
     this.socket.emit('message',mesg);
 };
 //Entrar em uma sala

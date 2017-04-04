@@ -10,12 +10,12 @@ function divEscapedContentElement(mensagem) {
 
 //Texto que vem do servidor é considerado seguro.
 function divSystemContentElement(mensagem) {
-    return $('<div></div>').html('<i>' + mensagem + '</i>');
+    return $('<div></div>').html('<b>' + mensagem + '</b>');
 }
 
 function processarEntrada(chatApp, socket) {
     var mensagem = $('#send-message').val();
-    console.log("Cliente enviou texto: ", mensagem );
+    console.log("processarEntrada: ", mensagem );
     var mensagemSistema;
 
     if(mensagem.charAt(0) == '/'){
@@ -50,21 +50,25 @@ $('#document').ready(function () {
         $('#messages').append(divSystemContentElement('Sala trocada!'));
     });
     socket.on('message',function (message) {//Mostra uma mensagem
+        console.log("Recebeu a mensagem\n>", message);
         var elemento = divEscapedContentElement(message.text);
         $('#messages').append(elemento);
     });
     socket.on('rooms',function (salas) {//Mostra a lista de salas
         $('#room-list').empty();
+
         for (var sala in salas){
-            sala = sala.substring(1,sala.length);
-            console.log("achou a sala ", sala);
+
+            //sala = sala.substring(1,sala.length);
             if(sala != ''){
                 $('#room-list').append(divEscapedContentElement(sala));
 
             }
         }
         $('#room-list div').click(function () {
-            chatApp.processarComando('/join ' + $('this').text()); //Permite entrar numa sala ao clicar no nome dela.
+            var com = '/join ' + $(this).text();
+            console.log('Clicou na sala!\n',com,'\n',$('this').text());
+            chatApp.processarComando(com); //Permite entrar numa sala ao clicar no nome dela.
             $('#send-message').focus()
         });
     });

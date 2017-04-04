@@ -1,7 +1,7 @@
 /**
  * Created by decker on 28/03/17.
  */
-var socket = require('socket.io');
+var socketIO = require('socket.io');
 //Inicialização
 var io;
 var guestNumber = 1;
@@ -12,35 +12,37 @@ var currentRoom = {};
 //Callbacks
 function listen(server){
     //Inicia o servidor socket.io, permitindo que ele execute junto com o http.
-    io = socket.listen(server);
+    io = socketIO.listen(server);
     io.set('log level',1);
-    io.sockets.on('connection',socketOnConnection);
+    io.sockets.on('connection',function (socket) {
+        //Dá um nome de guest para o usuário ao conectar
+        guestNumber = assignGuestName(socket,guestNumber,nicknames,namesUsed);
+        //Poe o usuário no lobbbu assim que ele conecta.
+        joinRoom(socket,'Lobby');
+        //Funcoes que lidam com as varias ações
+        handleMessageBroadcasting(socket,nicknames);
+        handleChangeNameAttempts(socket, nicknames,namesUsed);
+        handleRoomJoining(socket);
+        //Provê uma lista de salas ocupadas para o usuario sob demanda.
+        socket.on('rooms',function () {
+            socket.emit('rooms',io.of('/').adapter.rooms);
+
+        });
+        handleClientDisconnection(socket,nicknames,namesUsed);
+
+    });
 
 }
+
 exports.listen = listen;
-function socketOnConnection(socket) {
-    //Dá um nome de guest para o usuário ao conectar
-    guestNumber = assignGuestName(socket,guestNumber,nicknames,namesUsed);
-    //Poe o usuário no lobbbu assim que ele conecta.
-    joinRoom(socket,'Lobby');
-    //Funcoes que lidam com as varias ações
-    handleMessageBroadcasting(socket,nicknames);
-    handleChangeNameAttempts(socket, nicknames,namesUsed);
-    handleRoomJoining(socket);
-    //Provê uma lista de salas ocupadas para o usuario sob demanda.
-    io.sockets.on('rooms',socketOnRooms);
-    handleClientDisconnection(socket,nicknames,namesUsed);
 
-}
-function socketOnRooms() {
-    socket.emit('rooms',io.of('/').adapter.rooms);
-}
 
 //Funcoes Auxiliares
 //Cuida das mensagens dos usuários
 function handleMessageBroadcasting(socket,nicknames) {
     socket.on('message', function (message) {
-        socket.broadcast.to(message.room).emit('Message',{
+        console.log("HandleMessageBroadcasting:\n",message);
+        socket.broadcast.to(message.room).emit('message',{
             text: nicknames[socket.id] + " diz: " + message.text
         });
     });
@@ -59,6 +61,7 @@ function assignGuestName(socket,guestNumber,nicknames,namesUsed) {
 }
 //Logica relacionada a entrar em uma sala
 function joinRoom(socket,room) {
+    socket.leaveAll();
     socket.join(room);//Poe o usuário na sala
     currentRoom[socket.id] = room; //Atribui a sala como sala atual
     socket.emit('joinResult',{room:room});
@@ -66,12 +69,17 @@ function joinRoom(socket,room) {
         text: nicknames[socket.id] + " entrou na sala " + room
     });
     //Verifica quais usuarios estão na sala
-    var usersInRoom = io.of('/').in(room).clients;
+    
+    var usersInRoom = io.of('/').in(room).clients();
+    console.log("Verificando clientes na sala " + room + '\n',usersInRoom.connected);
     //Se tiver alguem na sala, mostrar para quem entrou
-    if(usersInRoom.length >1){
+
+
+
+    if(usersInRoom.connected.length>1){
         var msgUsersInRoom = "Pessoas atualmente na sala "+ room +"; ";
         for (var index in usersInRoom){
-            var userSocketId = usersInRoom[index].id;
+            var userSocketId = usersInRoom.connected[index].id;
             if(userSocketId != socket.id){
                 if (index > 0){
                     msgUsersInRoom += ", ";
