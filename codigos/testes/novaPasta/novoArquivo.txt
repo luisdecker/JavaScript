@@ -1,0 +1,8 @@
+function (erro,arquivo){
+					if(erro){
+						console.log
+						("Erro ao criar o arquivo!", erro);
+					}else{
+						console.log(arquivo);	
+					}				
+				}
