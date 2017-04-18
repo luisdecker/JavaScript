@@ -94,6 +94,69 @@ lerArquivoCriarPasta()
 		return fs.writeFileAsync('novaPasta3/arquivo.txt');
 	});
 
+/*
+Este código demonstra que qualquer coisa retornada por um ".then" também é 
+"entãozavel". 
+*/
+
+/*Lidando com erros
+Quando executando através dos vários '.then', se ocorre uma excessão, em qual-
+quer ponto, o bluebird irá procurar pelo '.catch' mais proximo para passar o 
+erro. Voce pode encadear varios '.catch' a sua cadeia de '.then'. 
+Como exemplo:
+*/
+
+fs.readFileAsync('file.txt')
+	.then((fileData) => {
+		return fs.mkdirAsync('novaPasta4');
+	})
+	.then(() => {
+		return fs.writeFileAsync('novaPasta4.arquivo.txt');
+	})
+	.catch((error)=> {
+		console.log(error);
+	})
+	
+/*
+No exemplo, os metodos 'writeFileAsync' e 'mkdirAsync' não existem nativamente
+no modulo fs (que não retorna promessas por default). Não obstante, o bluebird
+tem a capacidade de 'promessificar' modulos que não retornam promessas. Como em
+
+const Promisse = require('bluebird');
+fs = Promisse.promisifyAll(require('fs'));
+
+, onde fs é promissificado e retorna uma versao com promessas de fs.
+*/
+
+/*
+Como você pode promissificar um modulo, geralmente não se cria uma promessa 
+"na mão". 
+
+Para criar uma promessa, voce deve passar uma funcao com duas funcoes:
+    resolve: funcao que é chamada quando a função dá certo (then)
+    reject: funcao que é chamada quando algum erro ocorre: (catch)
+    
+*/
+
+//var Promisse = require('bluebird');
+var fsTradicional = require('fs');
+var lerArquivoAssincrono (file) =>{
+    return new Promisse((resolve,reject)=>{
+        fs.readFile(file,'utf8',(err,data)=>{
+            if(err){
+                reject(err);
+            }else{
+                resolve(data);
+            }
+        });
+    });
+}
+
+
+
+
+
+
 
 
 
