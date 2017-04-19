@@ -126,7 +126,7 @@ const Promisse = require('bluebird');
 fs = Promisse.promisifyAll(require('fs'));
 
 , onde fs é promissificado e retorna uma versao com promessas de fs.
-*/
+*/s
 
 /*
 Como você pode promissificar um modulo, geralmente não se cria uma promessa 
