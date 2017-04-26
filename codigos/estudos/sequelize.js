@@ -329,6 +329,211 @@ empregadoModeloOpcoes = {
 
 var Empregado = sequelize.define('empregado', empregadoModelo,
                                  empregadoModeloOpcoes);
+/*Funcoes auxiliares
+Existem funcoes auxiliares que podem ser utilizadas dentro de getters e setters
+
+Para pegar o valor de uma propiedade, use 
+*/
+this.getDataValue('propiedade');
+/*
+Para setar uma propiedade, use
+*/
+this.setDataValue('propiedae',dadosNovos)
+
+/*Validação
+A validação de modelo permite especificar validacoes de formato/modelo/heranca
+para cada atributo do modelo. 
+*/
+
+var validacaoModelo = {
+    foo:{
+        type: Sequelize.STRING,
+        validate: {
+            is: ["^[a-z]+$",'i'],     // will only allow letters
+            is: /^[a-z]+$/i,          // same as the previous example using real RegExp
+            not: ["[a-z]",'i'],       // will not allow letters
+            sEmail: true,            // checks for email format (foo@bar.com)
+            isUrl: true,              // checks for url format (http://foo.com)
+            isIP: true,               // checks for IPv4 (129.89.23.1) or IPv6 format
+            isIPv4: true,             // checks for IPv4 (129.89.23.1)
+            isIPv6: true,             // checks for IPv6 format
+            isAlpha: true,            // will only allow letters
+            isAlphanumeric: true,     // will only allow alphanumeric characters, so "_abc" will fail
+            isNumeric: true,          // will only allow numbers
+            isInt: true,              // checks for valid integers
+            isFloat: true,            // checks for valid floating point numbers
+            isDecimal: true,          // checks for any numbers
+            isLowercase: true,        // checks for lowercase
+            isUppercase: true,        // checks for uppercase
+            notNull: true,            // won't allow null
+            isNull: true,             // only allows null
+            notEmpty: true,           // don't allow empty strings
+            equals: 'specific value', // only allow a specific value
+            contains: 'foo',          // force specific substrings
+            notIn: [['foo', 'bar']],  // check the value is not one of these
+            isIn: [['foo', 'bar']],   // check the value is one of these
+            notContains: 'bar',       // don't allow specific substrings
+            len: [2,10],              // only allow values with length between 2 and 10
+            isUUID: 4,                // only allow uuids
+            isDate: true,             // only allow date strings
+            isAfter: "2011-11-05",    // only allow date strings after a specific date
+            isBefore: "2011-11-05",   // only allow date strings before a specific date
+            max: 23,                  // only allow values <= 23
+            min: 23,                  // only allow values >= 23
+            isArray: true,            // only allow arrays
+            isCreditCard: true,       // check for valid credit card numbers
+            
+            //É possível tambem criar funcoes personalizadas de validacao
+            
+            ehUm: (valor) => {
+                if(parseInt(valor) != 1){
+                    throw new Error("Não é um!")
+                }
+            }
+        }
+    }
+};
+
+Sequelize.define("foo", fooModelo);
+/*
+Note que quando multiplos argumentos são enviados para uma funcao de validacao
+built-in, eles são passados com um array. Quando se deseja passar um array como 
+argumento, passe ele como o unico elemento de um outro array.
+*/
+isIn: [[1,2,3]]
+/*
+Para utilizar uma mensagem personalizada ao inves da prvida pelo validator.js,
+use um objeto ao inves do argumento 
+*/
+//Para um validador sem agumentos:
+isInt: {
+    msg: "Precisa ser inteiro!"
+}
+//Para validadores que exigem argumentos:
+isIn:{
+    args: [['batata','cenoura','bacon']]
+    msg: "Precisa ser gostoso!"
+}
+
+/*
+A validaçao pode ser uma validação de modelo, verificando por exemplo se dois 
+parametros estao simultaneamente nulos ou nao nulos, 
+*/
+
+var pubModelo = {
+    nome:{
+        type: Sequelize.STRING
+    },
+    endereco:{
+        type: Sequelize.STRING
+    },
+    latitude:{
+        type: Sequelize:INTEGER,
+        allowNull: true,
+        defaultValue: null,
+        validate: {
+            min: -90,
+            max: 90
+        }
+     },
+     longitude:{
+        type: Sequelize:INTEGER,
+        allowNull: true,
+        defaultValue: null,
+        validate: {
+            min: -180,
+            max: 180
+        }
+     }
+}
+
+var Pub = Sequelize.define('pub',pubModelo,{
+    validate: {
+        ambasCoordenadas = () => {
+            if((this.latitude === null)!== (this.longitude === null)){
+                throw new Error("Requer Latitude e Longitude ou nenhum");
+            }
+        }
+    }
+});
+
+/*Configurações de tabela
+É possível configurar a maneira que o sequelize lida com os nomes de colunas:
+*/
+
+var Algo = Sequelize.define('algo',{/*Definicao*/},{
+    //Não adicionar os timestamps (updatedAt, createdAt)
+    timestamps: false,
+    //Não deletar as tuplas, mas sim inserir um atributo 'deletedAt' que vai 
+    //receber a data atual assim que for deletado. Só funcionará se timestamps
+    //estiver ativado
+    paranoid: true,
+    //Não usar camelCase e sim underscore_names
+    underscored: true,
+    //Por default, o sequelize utiliza o primeiro parametro do define como 
+    //nome da tabela e passa para o plural. Com 'freezeTableName', não faz isso.
+    freezeTableName: true,
+    //Também é possivel setar um nome personalizado para as tabelas
+    tableName: 'meu_nome_de_tabela',
+    //Pode trocar o nome dos timestamps
+    updatedAt: "atualizado_em",
+    //Pode retirar um dos timestamps
+    createdAt: false,
+    //Pode criar um comentario na tabela (MySQL|PostgreSQL)
+    comment: "Esta tabela é tabeluda!"
+});
+
+/*Importacao
+É possivel separar os modelos em pastas diferentes, facilitando reuso e a 
+organização
+*/
+//No arquivo pricipal
+var Projeto = sequelize.import(diretorio + '/caminho/para/modelos');
+
+//Nos arquivos de modelos
+module.exports = (sequelize,DataTypes) => {
+    return sequelize.define('projeto', {
+        nome: DataTypes.STRING,
+        descricao: DataTypes.TEXT
+    })
+}
+
+/*Sincronização do banco de dadosNovos
+Quando se comeca um novo projeto, não se tem a estrutura do banco, e usando 
+sequelize não é necessario ter. Somente especifique o seu modelo e deixe 
+a lib fazer o resto.
+Atualmente é suportado a criação e deleção de tabelas.
+*/
+//Criar as tabelas
+Projeto.sync();
+Tarefa.sync();
+//Forçar a criacao (dropa a tabela e depois recria)
+Projeto.sync({force: true});
+//Dropa as tabelas
+Projeto.drop();
+Tarefa.drop();
+//Tratamento de eventos
+Projeto.sync().then(() => {
+//O que fazer se tudo deu certo
+}).catch( (erro) => {
+//o que fazer se der algum erro
+})
+
+/*
+Também é possivel sincronizar/dropar todas as tabelas definidas pelo modelo
+*/
+//Sincroniza todas as tabelas
+sequelize.sync();
+//Força a sincronizacao de todas as tabelas
+sequelize.sync({force:true});
+//Dropa todas as tabelas
+sequelize.drop();
+
+
+
+
+
+
 
 
 
