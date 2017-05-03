@@ -521,6 +521,7 @@ Projeto.sync().then(() => {
 
 /*
 Também é possivel sincronizar/dropar todas as tabelas definidas pelo modelo
+Lebrando que as funcoes de Sync e Drop são promisses.
 */
 //Sincroniza todas as tabelas
 sequelize.sync();
@@ -529,16 +530,240 @@ sequelize.sync({force:true});
 //Dropa todas as tabelas
 sequelize.drop();
 
+/*Busca de dados
+Os métodos de busca servem para obter os dados do banco.
+Estes métodos não retornam dados crus, e sim instâncias do modelo. Como os méto-
+dos de busca retornam instancias do modelo, é possível chamar qualquer membro
+do resultado.
+*/
 
+/*Find
+Procura por um elemnto específico no banco de dados
+*/
 
+//Procura por id's conhecidos 
+//projeto será uma instancia de Projeto, e armazenara o conteúdo da tupla com
+//id 123. Se esta tupla nao estiver definida, retorna null.
+Projeto.findById(123)
+    .then((projeto) => {/*Faz algo com projeto*/});
+    
+//Procura por atributos
+//projeto será a primeira entrada da tabela com titulo 'UmProjeto' ou null
+Projeto.findOne({
+    where: {
+        title: 'UmProjeto'
+    }
+}).then( (projeto) => {/*Faz algo com projeto*/});
 
+//Neste caso, projeto.titulo vai ter o nome do projeto
+Projeto.findOne({
+    where: {
+        title:'UmProjeto'
+    }
+    attributes:[id, ['nome','titulo']];
+});
 
+/*findOrCreate
+Este metodo pode ser usado para checar se um dado elemento já existe no banco.
+Caso exista,irá retornar esta instância. Caso contrário, irá cria-la.
+*/
+Usuario.findOrCreate(
+    where:{
+        nome: "Zeca"
+    },
+    defaults:{
+        funcao:"Analista de Sistemas"
+    }    
+).spread( (usuario,criado) => {
+    //Vai imprimir os dados do usuário, e caso tenha sido criado agora, criado
+    //será 'true'
+    console.log(usuario.get({plain: true}),criado);
+});
 
+/*findAndCountAll
+Procura por multiplos elementos no banco, retorna tanto os dados quanto a conta-
+gem.
+*/
+Projeto.findAndCountAll({
+    where: {
+        titulo: {
+            $like: "Implementacao%"
+        }
+    },
+    offset: 10,
+    limit: 2
+}).then((resultado) => {
+    console.log(resultado.count);
+    console.log(resultado.rows)
+});
 
+/*
+findAndCountAll também aceita includes (Chaves estrangeiras).
+Somente includes marcados como 'required' serao contados
 
+suponha que voce queira achar todos os usuarios com perfis
+*/
 
+Usuario.findAndCountAll({
+    include:[
+        {
+            model: Perfil,
+            required: true
+        }
+    ],
+    limit:3
+});
 
+/*
+Como o include de Perfil foi marcado como 'required', a pesquisa resultará 
+em um inner join, e somente os usuarios que tiverem um perfil serão contados.
+Se removermos o required do include, tanto usuários que tenham e que não tenham
+perfis serão contados.
 
+Adicionando uma clausula where ao include automaticamente marca o mesmo como 
+required.
+*/
 
+Usuario.findAndCountAll({
+    include:[
+        {
+            model: Profile,
+            where:{
+                active:true
+            }
+        }        
+    ],
+    limit: 3
+});
+/*
+Esta query contara somente os usuario que tem um perfil ativo, já que required
+é implicitamente setado como true quando uma clausula where é adicionada ao 
+include.
 
+O objeto de opções passado ao findAndCountAll é o mesmo que para findAll
+*/
+
+/*findAll
+Procura por múltiplos elementos no banco de dados.
+*/
+
+//Procura multiplas entradas
+Projeto.findAll().then( (projetos) => {/*projetos será um array de Projetos*/} )
+//Outra sintaxe
+Projeto.all().then( (projetos) => {/*projetos será um array de Projetos*/} )
+//Procura por atributos específicos (usa hash)
+Projeto.all({
+    where: {name: "Projeto Maneiro"}
+}).then( (projetos)=> {/*...*/})
+//Procura com substituição de strings
+Projeto.all({
+    where: ["id > ?",14]
+}).then(/*Funcao*/)
+//Procura com um certo intervalo
+Projeto.all({
+    where: {id: [1,2,3,4]}
+}).then(/*funcao*/);
+//Colinha ;)
+Project.findAll({
+  where: {
+    id: {
+      $and: {a: 5}           // AND (a = 5)
+      $or: [{a: 5}, {a: 6}]  // (a = 5 OR a = 6)
+      $gt: 6,                // id > 6
+      $gte: 6,               // id >= 6
+      $lt: 10,               // id < 10
+      $lte: 10,              // id <= 10
+      $ne: 20,               // id != 20
+      $between: [6, 10],     // BETWEEN 6 AND 10
+      $notBetween: [11, 15], // NOT BETWEEN 11 AND 15
+      $in: [1, 2],           // IN [1, 2]
+      $notIn: [1, 2],        // NOT IN [1, 2]
+      $like: '%hat',         // LIKE '%hat'
+      $notLike: '%hat'       // NOT LIKE '%hat'
+      $iLike: '%hat'         // ILIKE '%hat' (case insensitive)  (PG only)
+      $notILike: '%hat'      // NOT ILIKE '%hat'  (PG only)
+      $overlap: [1, 2]       // && [1, 2] (PG array overlap operator)
+      $contains: [1, 2]      // @> [1, 2] (PG array contains operator)
+      $contained: [1, 2]     // <@ [1, 2] (PG array contained by operator)
+      $any: [2,3]            // ANY ARRAY[2, 3]::INTEGER (PG only)
+    },
+    status: {
+      $not: false,           // status NOT FALSE
+    }
+  }
+})
+
+/*Filtragem complexa e queries OR/NOT 
+É possível criar buscas complexas aninhando varios níveis de AND, OR e NOT.
+Para fazer isso, use $or, $and e $not
+*/
+//Nome = "umProjeto" AND id em [1,2,3] OU id > 10
+Projeto.findOne({
+    where: {
+        nome: "um projeto",
+        $or: [
+            {id: [1,2,3]},
+            //[1,2,3] também funciona.
+            {id: {$gt: 10} }
+        ]
+    }
+});
+//Exemplo com um não
+Projeto.findOne({
+    where:{
+        nome: "Batatinha",
+        $not: [
+            {id: [1,2,3]},
+            {array: {contains: [3,4,5]} }
+        ]
+    }
+});
+/*Isto gerará
+SELECT *
+FROM `Projetos`
+WHERE (
+  `Projetos`.`nome` = 'Batatinha'
+   AND NOT (`Projetos`.`id` IN (1,2,3) OR `Projetos`.`array` @> ARRAY[3,4,5]::INTEGER[])
+)
+LIMIT 1;
+
+*/
+
+/*Manipulando o dataset
+Para obter dados mais relevantes, podemos manipular o banco usando:
+    limit
+    offset
+    order
+    grouping
+*/
+//Limita os resultados de uma query a 10
+Projeto.findAll( {limit: 10} );
+//Pula os dez primeiros resultados
+Projeto.findAll( {offset: 10} );
+//Pula os dez primeiros e pega os 2 proximos
+Projeto.findAll( {offset:10, limit:2 } );
+/*
+A sintaxe para agrupamento e ordenação são iguais, ou seja, tudo que é feito com
+'group' pode também ser feito com 'order'
+*/
+//ORDER BY titulo DESC
+Projeto.findAll( {order: 'titulo DESC'} );
+//GROUP BY nome
+Projeto.findAll( {group: 'nome'} );
+/*
+Note que o nome das colunas será inserido assim como está na query. Quando uma 
+sting é passada para o order/group, esse sempre será o caso. Se for desejado
+nomes de colunas escapados ('nome'), deverá ser passado um array de argumentos,
+mesmo que seja somente um.
+*/
+Projeto.findOne({
+    order: [
+        'nome', //retorna 'nome'
+        'usuario DESC', //retorna 'usuario DESC' << NUNCA FAÇA ISSO
+        ['username','DESC'],// 'username' DESC
+        sequelize.fn('max',sequelize.col('idade')),// max('idade')
+        [sequelize.fn('max',sequelize.col('idade')), 'DESC']//max('idade') DESC 
+    
+    ]
+})
 
