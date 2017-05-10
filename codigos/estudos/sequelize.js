@@ -1,7 +1,7 @@
 /*SEQUELIZE
-Sequelize é um módulo para o NodeJS para mapeamento objeto-relacional (ORM).  
+Sequelize ? um m?dulo para o NodeJS para mapeamento objeto-relacional (ORM).  
 Suportando os dialetos PostgresSQL, MySQL, MariaDB, SQLite e MSSQL, suporta 
-transações sólidas, relações, replicação de leituras e mais.
+transa??es s?lidas, rela??es, replica??o de leituras e mais.
 
 Exemplo de uso:
 */
@@ -24,8 +24,8 @@ sequelize.sync().then(()={
 	}));
 });
 /*
-O sequelize cria uma pool de conexões na inicialização, logo, idealmente,
-somente uma instancia é criada para cada database.
+O sequelize cria uma pool de conex?es na inicializa??o, logo, idealmente,
+somente uma instancia ? criada para cada database.
 */
 var sequelize = new Sequelize ('database', 'username', 'password', {
 	host: 'localhost',
@@ -36,11 +36,11 @@ var sequelize = new Sequelize ('database', 'username', 'password', {
 		idle: 10000
 	}
 });
-//Ou então usar uma connection url
+//Ou ent?o usar uma connection url
 var sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname');
 
 /*
-Modelos são criados utilizando 
+Modelos s?o criados utilizando 
 	sequelize.define('nome',{atributos},{opcoes})
 */
 
@@ -65,43 +65,43 @@ User.sync({force: true}).then(()=>{
 	});
 });
 /*Modelos globais
-O construtor do sequelize recebe uma opção 'define' que sera usada como opções
+O construtor do sequelize recebe uma op??o 'define' que sera usada como op??es
 default para todos os modelos definidos
 */
 var sequelize = new Sequelize ('urlConexao', {
     define: {
-        var timestamps:false //Por default é true
+        var timestamps:false //Por default ? true
     }
 });
 
-var User = sequelize.define('usuario',{});//Timestamps é false por default
+var User = sequelize.define('usuario',{});//Timestamps ? false por default
 var Post = sequelize.define('post', {},{
-    timestamps: true //Para este modelo, timestamps é true
+    timestamps: true //Para este modelo, timestamps ? true
 });
 /*Promessas
 Sequelize utiliza o conceito depromessas para os controles assincronos de fluxo.
 */
-//NÃO USE ISSO
+//N?O USE ISSO
 user = User.findOne();
 console.log(user.get('nome'));
 /*
-Isto não iria funcionar, porque user é uma promessa, e não um dado cru do banco.
+Isto n?o iria funcionar, porque user ? uma promessa, e n?o um dado cru do banco.
 O jeito certo de fazer isso seria:
 */
 User.findOne().then( (user) => {
     console.log(user.get('nome'));
 });
 
-/*Sincronização
+/*Sincroniza??o
 sequelize.sync()
-    Baseado nas suas definições de modelo, vai criar quaisquer tabelas que fal-
-    tem. Com 'force: true', vai antes dropar as já existentes.
+    Baseado nas suas defini??es de modelo, vai criar quaisquer tabelas que fal-
+    tem. Com 'force: true', vai antes dropar as j? existentes.
 */
 
-/*Definição
+/*Defini??o
 Para definir mapeamentos entre um modelo e uma tabela, use o metodo 'define'.
-Os atribuitos 'createdAt' e 'updatedAt' são automaticamente inseridos, tornando
-possível saber quando uma entrada de dados foi para o banco e quando foi atuali-
+Os atribuitos 'createdAt' e 'updatedAt' s?o automaticamente inseridos, tornando
+poss?vel saber quando uma entrada de dados foi para o banco e quando foi atuali-
 zado a ultima vez. 
 */
 
@@ -120,7 +120,7 @@ var tarefaModelo = {
 var Tarefa = sequelize.define('tarefa',tarefaModelo);
 
 /*
-Também é possivel adicionar opcoes para cada coluna (atributo)
+Tamb?m ? possivel adicionar opcoes para cada coluna (atributo)
 */
 
 var fooModelo ={
@@ -156,7 +156,7 @@ var fooModelo ={
         type: Sequelize.STRING,
         unique: 'indiceComposto'
     },
-    //Chaves primárias
+    //Chaves prim?rias
     identificador: {
         type: Sequelize.INTEGER, 
         primaryKey: true
@@ -171,12 +171,12 @@ var fooModelo ={
         type: Sequelize.INTEGER,
         comment: "Um campo comentado!"        
     },
-    //É possivel especificar o nome de um campo usando 'field'
+    //? possivel especificar o nome de um campo usando 'field'
     campoPersonalizado:{
         type: Sequelize.INTEGER,
         field: "campo_personalizado"
     },
-    //É possivel criar chaves estrangeiras
+    //? possivel criar chaves estrangeiras
     id_coisa:{
         type: Sequelize.INTEGER,
         references: {
@@ -189,7 +189,7 @@ var fooModelo ={
 }
 
 /*Tipos de dados
-Os principais tipos de dados aceitos pelo sequelize são apresentados a seguir.
+Os principais tipos de dados aceitos pelo sequelize s?o apresentados a seguir.
 Para uma lista mais completa e atualizada, refira-se ao manual.
 [http://docs.sequelizejs.com/en/v3/api/datatypes]
 */
@@ -249,10 +249,10 @@ Sequelize.GEOMETRY('POINT', 4326)     // Spatial column with geometry type and S
 /*
 O tipo de dados BLOB permita que voce insira dados tanto como strings assim como
 buffers. Quando se executa 'find' ou 'findAll' em um modelo que contenha uma
-colina BLOB, o dado será sempre retornado como um buffer.
+colina BLOB, o dado ser? sempre retornado como um buffer.
 
 Em adicao aos tipos citados, integer, bigint, float e double tambem aceitam as 
-propiedades 'zerofill' e 'unisgned'[Com excessão do PostgreSQL]
+propiedades 'zerofill' e 'unisgned'[Com excess?o do PostgreSQL]
 */
 
 Sequelize.INTEGER.UNSIGNED              // INTEGER UNSIGNED
@@ -262,7 +262,7 @@ Sequelize.INTEGER(11).ZEROFILL.UNSIGNED // INTEGER(11) UNSIGNED ZEROFILL
 Sequelize.INTEGER(11).UNSIGNED.ZEROFILL // INTEGER(11) UNSIGNED ZEROFILL
 
 /*Getters e Setters
-É possivel criar getters e setters para as propiedades dos objetos nos seus
+? possivel criar getters e setters para as propiedades dos objetos nos seus
 modelos. Estas funcoes podem ser usadas tanto para 'proteger' propiedades que
 mapeiam para campos no banco de dados ou para criar pseudopropiedades.
 */
@@ -301,7 +301,7 @@ Empregado
     .create(novoEmpregado)
     .then(printaEmpregado);
 
-//Versão de empregadoModelo com os getters e setters como opcoes do modelos
+//Vers?o de empregadoModelo com os getters e setters como opcoes do modelos
 
 empregadoModelo = {
     nome: {
@@ -340,8 +340,8 @@ Para setar uma propiedade, use
 */
 this.setDataValue('propiedae',dadosNovos)
 
-/*Validação
-A validação de modelo permite especificar validacoes de formato/modelo/heranca
+/*Valida??o
+A valida??o de modelo permite especificar validacoes de formato/modelo/heranca
 para cada atributo do modelo. 
 */
 
@@ -383,11 +383,11 @@ var validacaoModelo = {
             isArray: true,            // only allow arrays
             isCreditCard: true,       // check for valid credit card numbers
             
-            //É possível tambem criar funcoes personalizadas de validacao
+            //? poss?vel tambem criar funcoes personalizadas de validacao
             
             ehUm: (valor) => {
                 if(parseInt(valor) != 1){
-                    throw new Error("Não é um!")
+                    throw new Error("N?o ? um!")
                 }
             }
         }
@@ -396,8 +396,8 @@ var validacaoModelo = {
 
 Sequelize.define("foo", fooModelo);
 /*
-Note que quando multiplos argumentos são enviados para uma funcao de validacao
-built-in, eles são passados com um array. Quando se deseja passar um array como 
+Note que quando multiplos argumentos s?o enviados para uma funcao de validacao
+built-in, eles s?o passados com um array. Quando se deseja passar um array como 
 argumento, passe ele como o unico elemento de um outro array.
 */
 isIn: [[1,2,3]]
@@ -416,7 +416,7 @@ isIn:{
 }
 
 /*
-A validaçao pode ser uma validação de modelo, verificando por exemplo se dois 
+A valida?ao pode ser uma valida??o de modelo, verificando por exemplo se dois 
 parametros estao simultaneamente nulos ou nao nulos, 
 */
 
@@ -457,35 +457,35 @@ var Pub = Sequelize.define('pub',pubModelo,{
     }
 });
 
-/*Configurações de tabela
-É possível configurar a maneira que o sequelize lida com os nomes de colunas:
+/*Configura??es de tabela
+? poss?vel configurar a maneira que o sequelize lida com os nomes de colunas:
 */
 
 var Algo = Sequelize.define('algo',{/*Definicao*/},{
-    //Não adicionar os timestamps (updatedAt, createdAt)
+    //N?o adicionar os timestamps (updatedAt, createdAt)
     timestamps: false,
-    //Não deletar as tuplas, mas sim inserir um atributo 'deletedAt' que vai 
-    //receber a data atual assim que for deletado. Só funcionará se timestamps
+    //N?o deletar as tuplas, mas sim inserir um atributo 'deletedAt' que vai 
+    //receber a data atual assim que for deletado. S? funcionar? se timestamps
     //estiver ativado
     paranoid: true,
-    //Não usar camelCase e sim underscore_names
+    //N?o usar camelCase e sim underscore_names
     underscored: true,
     //Por default, o sequelize utiliza o primeiro parametro do define como 
-    //nome da tabela e passa para o plural. Com 'freezeTableName', não faz isso.
+    //nome da tabela e passa para o plural. Com 'freezeTableName', n?o faz isso.
     freezeTableName: true,
-    //Também é possivel setar um nome personalizado para as tabelas
+    //Tamb?m ? possivel setar um nome personalizado para as tabelas
     tableName: 'meu_nome_de_tabela',
     //Pode trocar o nome dos timestamps
     updatedAt: "atualizado_em",
     //Pode retirar um dos timestamps
     createdAt: false,
     //Pode criar um comentario na tabela (MySQL|PostgreSQL)
-    comment: "Esta tabela é tabeluda!"
+    comment: "Esta tabela ? tabeluda!"
 });
 
 /*Importacao
-É possivel separar os modelos em pastas diferentes, facilitando reuso e a 
-organização
+? possivel separar os modelos em pastas diferentes, facilitando reuso e a 
+organiza??o
 */
 //No arquivo pricipal
 var Projeto = sequelize.import(diretorio + '/caminho/para/modelos');
@@ -498,16 +498,16 @@ module.exports = (sequelize,DataTypes) => {
     })
 }
 
-/*Sincronização do banco de dadosNovos
-Quando se comeca um novo projeto, não se tem a estrutura do banco, e usando 
-sequelize não é necessario ter. Somente especifique o seu modelo e deixe 
+/*Sincroniza??o do banco de dadosNovos
+Quando se comeca um novo projeto, n?o se tem a estrutura do banco, e usando 
+sequelize n?o ? necessario ter. Somente especifique o seu modelo e deixe 
 a lib fazer o resto.
-Atualmente é suportado a criação e deleção de tabelas.
+Atualmente ? suportado a cria??o e dele??o de tabelas.
 */
 //Criar as tabelas
 Projeto.sync();
 Tarefa.sync();
-//Forçar a criacao (dropa a tabela e depois recria)
+//For?ar a criacao (dropa a tabela e depois recria)
 Projeto.sync({force: true});
 //Dropa as tabelas
 Projeto.drop();
@@ -520,35 +520,35 @@ Projeto.sync().then(() => {
 })
 
 /*
-Também é possivel sincronizar/dropar todas as tabelas definidas pelo modelo
-Lebrando que as funcoes de Sync e Drop são promisses.
+Tamb?m ? possivel sincronizar/dropar todas as tabelas definidas pelo modelo
+Lebrando que as funcoes de Sync e Drop s?o promisses.
 */
 //Sincroniza todas as tabelas
 sequelize.sync();
-//Força a sincronizacao de todas as tabelas
+//For?a a sincronizacao de todas as tabelas
 sequelize.sync({force:true});
 //Dropa todas as tabelas
 sequelize.drop();
 
 /*Busca de dados
-Os métodos de busca servem para obter os dados do banco.
-Estes métodos não retornam dados crus, e sim instâncias do modelo. Como os méto-
-dos de busca retornam instancias do modelo, é possível chamar qualquer membro
+Os m?todos de busca servem para obter os dados do banco.
+Estes m?todos n?o retornam dados crus, e sim inst?ncias do modelo. Como os m?to-
+dos de busca retornam instancias do modelo, ? poss?vel chamar qualquer membro
 do resultado.
 */
 
 /*Find
-Procura por um elemnto específico no banco de dados
+Procura por um elemnto espec?fico no banco de dados
 */
 
 //Procura por id's conhecidos 
-//projeto será uma instancia de Projeto, e armazenara o conteúdo da tupla com
+//projeto ser? uma instancia de Projeto, e armazenara o conte?do da tupla com
 //id 123. Se esta tupla nao estiver definida, retorna null.
 Projeto.findById(123)
     .then((projeto) => {/*Faz algo com projeto*/});
     
 //Procura por atributos
-//projeto será a primeira entrada da tabela com titulo 'UmProjeto' ou null
+//projeto ser? a primeira entrada da tabela com titulo 'UmProjeto' ou null
 Projeto.findOne({
     where: {
         title: 'UmProjeto'
@@ -564,8 +564,8 @@ Projeto.findOne({
 });
 
 /*findOrCreate
-Este metodo pode ser usado para checar se um dado elemento já existe no banco.
-Caso exista,irá retornar esta instância. Caso contrário, irá cria-la.
+Este metodo pode ser usado para checar se um dado elemento j? existe no banco.
+Caso exista,ir? retornar esta inst?ncia. Caso contr?rio, ir? cria-la.
 */
 Usuario.findOrCreate(
     where:{
@@ -575,8 +575,8 @@ Usuario.findOrCreate(
         funcao:"Analista de Sistemas"
     }    
 ).spread( (usuario,criado) => {
-    //Vai imprimir os dados do usuário, e caso tenha sido criado agora, criado
-    //será 'true'
+    //Vai imprimir os dados do usu?rio, e caso tenha sido criado agora, criado
+    //ser? 'true'
     console.log(usuario.get({plain: true}),criado);
 });
 
@@ -598,7 +598,7 @@ Projeto.findAndCountAll({
 });
 
 /*
-findAndCountAll também aceita includes (Chaves estrangeiras).
+findAndCountAll tamb?m aceita includes (Chaves estrangeiras).
 Somente includes marcados como 'required' serao contados
 
 suponha que voce queira achar todos os usuarios com perfis
@@ -615,10 +615,10 @@ Usuario.findAndCountAll({
 });
 
 /*
-Como o include de Perfil foi marcado como 'required', a pesquisa resultará 
-em um inner join, e somente os usuarios que tiverem um perfil serão contados.
-Se removermos o required do include, tanto usuários que tenham e que não tenham
-perfis serão contados.
+Como o include de Perfil foi marcado como 'required', a pesquisa resultar? 
+em um inner join, e somente os usuarios que tiverem um perfil ser?o contados.
+Se removermos o required do include, tanto usu?rios que tenham e que n?o tenham
+perfis ser?o contados.
 
 Adicionando uma clausula where ao include automaticamente marca o mesmo como 
 required.
@@ -636,26 +636,26 @@ Usuario.findAndCountAll({
     limit: 3
 });
 /*
-Esta query contara somente os usuario que tem um perfil ativo, já que required
-é implicitamente setado como true quando uma clausula where é adicionada ao 
+Esta query contara somente os usuario que tem um perfil ativo, j? que required
+? implicitamente setado como true quando uma clausula where ? adicionada ao 
 include.
 
-O objeto de opções passado ao findAndCountAll é o mesmo que para findAll
+O objeto de op??es passado ao findAndCountAll ? o mesmo que para findAll
 */
 
 /*findAll
-Procura por múltiplos elementos no banco de dados.
+Procura por m?ltiplos elementos no banco de dados.
 */
 
 //Procura multiplas entradas
-Projeto.findAll().then( (projetos) => {/*projetos será um array de Projetos*/} )
+Projeto.findAll().then( (projetos) => {/*projetos ser? um array de Projetos*/} )
 //Outra sintaxe
-Projeto.all().then( (projetos) => {/*projetos será um array de Projetos*/} )
-//Procura por atributos específicos (usa hash)
+Projeto.all().then( (projetos) => {/*projetos ser? um array de Projetos*/} )
+//Procura por atributos espec?ficos (usa hash)
 Projeto.all({
     where: {name: "Projeto Maneiro"}
 }).then( (projetos)=> {/*...*/})
-//Procura com substituição de strings
+//Procura com substitui??o de strings
 Projeto.all({
     where: ["id > ?",14]
 }).then(/*Funcao*/)
@@ -694,7 +694,7 @@ Project.findAll({
 })
 
 /*Filtragem complexa e queries OR/NOT 
-É possível criar buscas complexas aninhando varios níveis de AND, OR e NOT.
+? poss?vel criar buscas complexas aninhando varios n?veis de AND, OR e NOT.
 Para fazer isso, use $or, $and e $not
 */
 //Nome = "umProjeto" AND id em [1,2,3] OU id > 10
@@ -703,12 +703,12 @@ Projeto.findOne({
         nome: "um projeto",
         $or: [
             {id: [1,2,3]},
-            //[1,2,3] também funciona.
+            //[1,2,3] tamb?m funciona.
             {id: {$gt: 10} }
         ]
     }
 });
-//Exemplo com um não
+//Exemplo com um n?o
 Projeto.findOne({
     where:{
         nome: "Batatinha",
@@ -718,7 +718,7 @@ Projeto.findOne({
         ]
     }
 });
-/*Isto gerará
+/*Isto gerar?
 SELECT *
 FROM `Projetos`
 WHERE (
@@ -743,27 +743,115 @@ Projeto.findAll( {offset: 10} );
 //Pula os dez primeiros e pega os 2 proximos
 Projeto.findAll( {offset:10, limit:2 } );
 /*
-A sintaxe para agrupamento e ordenação são iguais, ou seja, tudo que é feito com
-'group' pode também ser feito com 'order'
+A sintaxe para agrupamento e ordena??o s?o iguais, ou seja, tudo que ? feito com
+'group' pode tamb?m ser feito com 'order'
 */
 //ORDER BY titulo DESC
 Projeto.findAll( {order: 'titulo DESC'} );
 //GROUP BY nome
 Projeto.findAll( {group: 'nome'} );
 /*
-Note que o nome das colunas será inserido assim como está na query. Quando uma 
-sting é passada para o order/group, esse sempre será o caso. Se for desejado
-nomes de colunas escapados ('nome'), deverá ser passado um array de argumentos,
+Note que o nome das colunas ser? inserido assim como est? na query. Quando uma 
+sting ? passada para o order/group, esse sempre ser? o caso. Se for desejado
+nomes de colunas escapados ('nome'), dever? ser passado um array de argumentos,
 mesmo que seja somente um.
 */
 Projeto.findOne({
     order: [
         'nome', //retorna 'nome'
-        'usuario DESC', //retorna 'usuario DESC' << NUNCA FAÇA ISSO
+        'usuario DESC', //retorna 'usuario DESC' << NUNCA FA?A ISSO
         ['username','DESC'],// 'username' DESC
         sequelize.fn('max',sequelize.col('idade')),// max('idade')
         [sequelize.fn('max',sequelize.col('idade')), 'DESC']//max('idade') DESC 
     
     ]
 })
+/*Queries puras
+ * Caso voce queira simplesmente acessar o banco passando uma query feita na 
+ * m?o, ? poss?vel usar o atributo 'raw'. Ele n?o cria manipuladores para cada
+ * dado, somente mostra dados puros.
+ */
+Projeto.findAll({
+    where: {...},
+    raw: true
+})
 
+/*Count
+ *Existe tamb?m um metodo para contar o numero de ocorrencias no banco
+ */
+
+Projeto.count()
+    .then( (c) => {
+        console.log("Temos " + c + " projetos!");
+    })
+Projeto.count({
+    where: ["id > ?",25]
+}).then( (c) => {
+    console.log("Temos " + c + " projetos com id maior de 25  ")
+})
+
+/*MAX
+ * Pega o maior valor de um atributo espec?fico em uma tabela
+ */
+
+Projeto.max('custo')
+    .then( (max) => {
+        //max ter? o valor do maior custo
+    });
+    
+Projeto.max('custo', {
+    where:{
+        integrantes: {
+            $lt: 20
+        }
+    }
+}).then((max) => {
+    //Max ser? o maior custo de um projeto com menos de 20 integrantes
+})
+
+/*MIN
+ * Semelhante ao max, mas pega o m?nimo
+ */
+
+Projeto.min('custo')
+    .then( (min) => {
+        //Menor custo
+    });
+Projeto.min('custo',{
+    where:{
+        integrantes:{
+            $gt:20
+        }
+    }
+}).then((min) => {
+    //menor custo de um projeto com mais de 20 pessoas
+})
+/*SUM
+ * Calcula a soma de uma coluna
+ */
+
+Projeto.sum('integrantes')
+    .then( (sum) => {
+        //Soma de todos os integrantes
+    });
+Projeto.sum('integrantes', {
+    where:{
+        custo:{
+            $gt:5*1000000
+        }
+    }
+}).then((sum)=>{
+    //Soma de todos os integrantes de projetos de mais de 2 MI 
+})
+
+/*Eager Loading "Carregamento Ansioso"
+Quando estamos pegando dados do banco, tem um grande chance que queraimos tam-
+b?m obter associa??es com a mesma query: isto se chama 'Eager Loading'.
+A id?ia basica atr?s disso ? o uso do atributo 'include' quando chamar um 
+find ou findAll.
+*/
+
+//Assumindo o seguinte setup:
+var User = sequelize.define('user',{nome:Sequelize.STRING});
+
+    
