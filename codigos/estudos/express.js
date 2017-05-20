@@ -224,10 +224,49 @@ app.use("/plape",Plape);
 //app agora será capaz de tratar requisições para /plape, /plape/config e chamar
 //o middleware de log de tempo que é especificado para a rota
 
+/*Middlewares
+ Uma função de middleware é uma funcao que tem acesso aos objetos de requisicao
+ (req), de resposta (res) e a proxima funcao no ciclo de requisicao-resposta.
+ Um middleware pode:
+    ->Executar código
+    ->Executar mudanças no objeto de requisição e de resposta
+    ->Terminar o cliclo requisicao-resposta
+    ->Chamar o proximo middleware na pilha
+ */
+//Como exemplo, um middleware que nao faz nada com os objetos, só loga a passa-
+//gem
 
+var logger = (req,res,next) => {
+    console.log("Passou pelo logger!");
+    next();
+}
+//Para usar a funçao de middleware, chame app.use(), especificando uma funcao
+//de middleware. 
 
+app.use(logger);
 
+app.get('/', (req,res)=>{
+    res.send("Olá!");
+})
 
+app.listen(8080);
+//Assim ,cada vez que o app receber uma requisição, o logger será chamado e irá
+//printar a sua mensagem
 
+//Outro exemplo: iremos criar uma funcao "request time", que adiciona uma propi-
+//edade no objeto de requisição
 
+var requestTime = (req,res,next){
+    req.requestTime = Date.now();
+    next();
+}
 
+//Agora, o tratador de rota da raiz utiliza esta propiedade
+
+app.use(requestTime);
+
+app.get('/',(req,res)=>{
+    res.send("Requisição feita em " + req.requestTime);
+});
+
+app.listen(8080);

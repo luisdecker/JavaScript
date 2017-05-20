@@ -1,0 +1,331 @@
+<!--
+ANGULAR JS 
+    O angular é um framework JS que pode ser adicionado a uma pagina html utili-
+zando uma tag <script>. Ele extende os atributos HTML com diretivas, e junta os
+dados com expressões HTML.
+
+    Como o angular é um arquivo js, ele pode ser adicionado na pagina utilizando
+uma tag script:
+    <script
+    src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
+    </script>
+    
+    O angular extende o HTML com ng-directives.
+    
+    ng-app define uma aplicação AngularJS
+    ng-model liga os valores dos controles HTML(input, textarea, select) aos 
+               dados da aplicação
+    ng-bind liga os dados da aplicação a view html
+        
+    Exemplo
+    -->
+<!DOCTYPE html>
+<HTML>
+    <SCRIPT>//Inclui o angular
+    //Note que o angular deve ser incluido logo no começo do documento, para 
+    //que as funções dele possam ser compiladas. 
+    </SCRIPT>  
+    <BODY>
+        <DIV ng-app="">
+            <p>Nome: <input type="text" ng-model="nome"></p>
+            <p ng-bind="nome"> </p>
+        </DIV>
+    </BODY>
+</HTML>
+<!--
+O angular inicia automaticamente assim que a pagina é carregada. 
+    A diretiva ng-app define aquela div como a portadora de um app angular
+    A diretiva ng-model liga o valor do campo de entrada para a variavel 'nome', 
+variavel esta do app.
+    A diretiva ng-bind liga o innerHTML do paragrafo (<p>) com 'nome'
+
+-->
+
+<!-- DIRETIVAS ANGULAR.JS
+As diretivas são atributos com o prefixo ng, que são interpretadas pelo angular.
+
+A diretiva ng-init inicializa uma variavel de aplicação
+-->
+<div ng-app="", ng-init="nome='Plape!'">
+<p>A startup mais inovadora do BR se chama <span ng-bind="nome"></span></p>
+
+<!-- EXPRESSOES
+Expressoes do angular sempre estão entre chaves duplas 
+{{expressao}}
+ou dentro de uma diretiva ng-bind
+ng-bind="expressao"
+O angular vai mostrar dados exatamente onde a expressão é escrita
+Expressões Angular são parecidas com expressoes JS. Elas podem conter literais,
+operadoes e variaveis.
+{{5+5}} {{"batata " + estado}}
+As expressões podem ser escritas onde for desejado. O Angular simplesmente as 
+resolverá e substituirá o valor pelo valor resolvido.
+
+-->
+<!--Uso do angular para mudar o css-->
+<div ng-app='' ng-init="myCol='lightblue'">
+    <input style="background-color: {{myCol}}" ng-model="myCol"
+    value="{{myCol}}">
+</div>
+
+<div ng-app="">
+    <p>Plape é nota {{5+5}} </p>
+</div>
+<!--
+Expressoes ligam dados do angular com o HTML da mesma maneira que o ng-bind
+-->
+    <p>Digite o nome: <input type='text' ng-model='nome'></p>
+    <p>O nome é {{nome}}</p>
+    
+<!--APLICACOES
+->modules definem aplicacoes
+->controlers definem o controle dos app angular
+->ng-app define a aplicação, ng-controller define o controlador
+-->
+<div ng-app=meuApp ng-controller=controlador>
+    Primeiro Nome: <input type=text ng-model=primeiroNome><br>
+    Segundo Nome: <input type=text ng-model=segundoNome><br>
+    <br>
+    Nome completo: {{primeiroNome + " " + segundoNome}}
+</div>
+
+<script>
+    //Um módulo define aplicacoes
+    var app = angular.module("meuApp",[]);
+    //Controladores controlam as aplicacoes
+    app.controller('controlador', function($scope){
+        $scope.firstName = "Zeca";
+        $scole.segundoNome = "Tinhoso";
+    });
+</script>
+
+<!--NUMEROS NO ANGULAR
+Numeros no angular agem da mesma forma que no js
+-->
+<div ng-app='' ng-init='quantidade=1; custo=5'>
+    <p>Total: {{quantidade * custo}}</p>
+</div>
+
+<!--STRINGS NO ANGULAR
+Strings são tratadas da mesma maneira que no JS
+-->
+
+<div ng-app='' ng-init='nome="Joao"; sobrenome="Silva"'>
+    <p> O nome é {{nome + " " + sobrenome}}</p>
+</div>
+<!--OBJETOS NO ANGULAR
+Objetos são tratadas da mesma maneira que no JS
+-->
+<div ng-app='' ng-init='pessoa={nome:"Joao",sobrenome:"Silva"}'>
+    <p>A pessoa se chama {{pessoa.nome + " " + pessoa.sobrenome}}</p>
+</div>
+
+<!--ARRAYS NO ANGULAR
+Arrays são tratadas da mesma maneira que no JS
+-->
+<div ng-app='' ng-init='pessoa=["Joao", "Silva"]'>
+    <p>A pessoa se chama {{pessoa[0] + " " + pessoa[1]}}</p>
+</div>
+
+<!--MODULOS NO ANGULAR
+Um módulo Angular define uma aplicação. Ele é um container para as diferentes 
+partes de uma aplicação e para os controladores da aplicação.
+Controladores sempre pertencem a um módulo.
+
+Para definir um módulo, se usa a função 'angular.module()'
+-->
+<div ng-app='meuApp'> <!----> </div>
+
+<script>
+    var app = angular.module('meuApp',[]);
+</script>
+<!--
+o parâmetro 'meuApp se refere ao elemento HTML em que a aplicação vai rodar.
+Agora é possível adicionar controladores, diretivas, filtros e mais a sua 
+aplicação Angular.
+-->
+
+<div ng-app='app' ng-controller='ctrl'>
+    {{nome + " " + sobrenome}}
+</div>
+
+<script>
+    //O parametro [] é utilizado para definir modulos dependentes. Sem este 
+    //parametro, estamos carregando um já existente, e não criando um novo.
+    var app = angular.module('app',[]);
+    app.controller('ctrl', function($scope){
+        $scope.nome = "Joao";
+        $scope.sobrenome = "Silva"
+    });
+</script>
+
+<!--DIRETIVAS
+O Angular possui um set de diretivas built-in que adicionam funcionalidades
+na aplicação. Este conjunto pode ser obtido em 
+<https://www.w3schools.com/angular/angular_ref_directives.asp>
+Em adição, você pode usar o modulo para adicionar suas propias diretivas 
+a sua aplicação
+-->
+
+<div ng-app='app' diretivaTeste></div>
+<script>
+    var app = angular.module("app",[]);
+    app.directives("diretivaTeste", function(){
+        return {
+            template: "Atributo criado no contrutor da diretiva!"
+        };
+    });
+</script>
+
+<!--MODULOS E CONTROLADORES EM ARQUIVOS
+    È comum no Angular por os modulos e seus controladores em arquivos js. 
+No exemplo a seguir, meuApp.js contém a definição do modulo da aplicação, 
+enquanto ctrl.js contém o controller.
+-->
+<div ng-app='app', ng-controller='ctrl'>
+    {{nome + " " + sobrenome}}
+</div>
+<script type="text/javascript" src=app.js></script>
+<script src="ctrl.js" type="text/javascript"></script>
+
+<!--Atribuição de dados
+    Uma expressão do tipo {{var}} é uma expressão de atribuição. 
+    A atribuição de dados vincula expressões Angular com dados Angular.
+    {{var}} é vinculad a ng-model='var'
+-->
+<div ng-app="" ng-init="quantidade=1;preco=2">
+    Quantidade: <input type="number" ng-model = quantidade />
+    Quantidade: <input type="number" ng-model = preco />
+    Total:{{quantidade*preco}}
+</div>
+<!--
+    A diretiva ng-repeat repete um elemento HTML.
+    Ela clona um elemeto HTML para cada item em uma coleção
+-->
+<div ng-app='', ng-init='nomes=["Zeca","Maria","Gugu"]'>
+    <ul>
+        <!--
+            Insere um li para cada nome em nomes
+        -->
+        <li ng-repeat='x in nomes'>
+            {{x}}
+        </li>    
+    </ul>
+</div>
+
+<!--CRIAR NOVAS DIRETIVAS
+    É possível criar novas diretivas, em complemento as já nativas do Angular.
+Novas diretivas são acionadas com a função .directive.
+Para invocar uma nova diretiva, crie um elemento html com uma tag com nome igual
+ao da nova diretiva.
+    Quando nomear uma nova diretiva, use camelCaseName, mas ao invoca-la, 
+separe-por-tracos
+-->
+<body ng-app='app'">
+    <nova-diretiva></nova-diretiva>
+    <<script type="text/javascript">
+        var app = angular.module('app',[]);
+        app.directive('novaDiretiva', function(){
+            return{
+                template: "<h1> gerado por uma diretiva!<h1>"
+            };
+        });
+    </script>>
+</body>
+
+<!--
+    Podemos chamar diretivas de quatro maneiras (com todas resultando na mesma
+    coisa)
+-->
+Nome do elemento 
+<minha-nova-diretiva></minha-nova-diretiva>
+    
+Atributo
+<div minha-nova-diretiva></div>
+
+Classe
+<div class='minha-nova-diretiva'></div>
+
+Comentario
+<!-- directive: minha-nova-diretiva -->
+
+<!--Restrições
+    Podemos usar o atributo 'restrict' a definição da diretiva para restringir 
+o tipo de uso da diretiva
+
+Os valores válidos para restrict são:
+    E for Element name
+    A for Attribute
+    C for Class
+    M for Comment
+
+O valor default é EA, ou seja, por nome do elemento e por atributo.
+-->
+
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.directive('minhaNovaDiretiva', function() {
+        return{
+            restrict: "AEM",
+            template: '<h1>Gerado por Diretiva!</h1>'
+        }
+    })
+</script>
+<!--Validação de entrada do usuário
+    A diretiva ng-model permite validação de tipo da entrada do usuário
+-->
+<form ng-app='' name='meuForm'>
+    
+    Email:
+    <input name="meuEmail" type="email" ng-model='text' />
+    <span ng-show='meuForm.meuEmail.$error.email'>Não é um email válido</span>
+    
+    <!--O span só vai aparecer somente se a expressão de ng-show retornar true
+    -->
+    
+</form>
+<!--Estado da aplicação
+    A diretiva ng-model provê informação de status dos dados da aplicação (in-
+    válido, sujo, tocado,erro)
+-->
+<form ng-app="" name='meuForm' ng-init="texto='joao@google.com'">
+    
+Email:
+    <input type="email" name='endereco' ng-model='texto' required />
+    <h1>status</h1>
+    {{meuForm.endereco.$valid}}
+    {{meuForm.endereco.$dirty}}
+    {{meuForm.endereco.$touched}}
+</form>
+
+<!--Classes css
+A diretiva ng-model define classes CSS para elementos HTML, dependendo dos seus
+estados.
+Esta diretiva adiciona/remove as seguintes classes, dependendo do estado do 
+campo do form
+    ng-empty
+    ng-not-empty
+    ng-touched
+    ng-untouched
+    ng-valid
+    ng-invalid
+    ng-dirty
+    ng-pending
+    ng-pristine
+-->
+<style type="text/css">
+    input.ng-invalid{
+        background-color: lightblue;
+    }
+</style>
+
+<form ng-app='' name="meuForm">
+    Digite seu nome:
+    <input name="meuNome" ng-model='texto' required/>
+</form>
+
+
+
+
+
+
