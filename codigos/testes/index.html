@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<HTML>
+    <head>
+        <meta charset="utf-8">
+        <title>Testes Angular</title>
+
+        <!--Inclui JQuery-->
+        <script src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>        
+        <!--Inclui o angular-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js" type="text/javascript"></script>
+        <!--Inclui o angular route-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+
+        
+    </head>
+    <body id="corpo">
+        <div id=titulo ng-app='app' ng-controller='ctrl'>
+            <p > Digite uma string: <input id='string' type=text ng-model='texticulo' onInput="update('texticulo','string')"></input> </p>
+            <input type='checkbox' id='estadoString' onChange='escondeMostraString()'>Mostrar Texto</input>
+            <p id=texto> {{texticulo}} </p>
+        </div>
+    </body>
+    <script type="text/javascript">
+        var app = angular.module("app",[]);
+        app.controller('ctrl', ($scope)=>{
+            
+        })
+        
+        document.getElementById('texto').hidden = true;
+        var escondeMostraString = () => {
+            var checked = document.getElementById('estadoString').checked;
+            document.getElementById('texto').hidden = !checked;
+        }
+        var update = (umaVar,id) => {
+            scope = angular.element("#"+id).scope();
+            scope[umaVar] = document.getElementById(id).value;
+            console.log ("Atualizou " + umaVar + " com " + scope[umaVar]);
+        }
+        var logText = (text) => {console.log(text);}
+        
+        
+        
+    </script>
+</HTML>
